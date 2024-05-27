@@ -1,4 +1,4 @@
-package model;
+package model.beans;
 
 public class MetodoPagamento {
     private String nome;

@@ -1,9 +1,9 @@
-package model;
+package model.beans;
 
-public class MetodoSpedizione {
+public class Categoria {
     private String nome;
     private String descrizione;
-    private int costo;
+    private String immagine;
 
     public String getNome() {
         return nome;
@@ -21,11 +21,11 @@ public class MetodoSpedizione {
         this.descrizione = descrizione;
     }
 
-    public int getCosto() {
-        return costo;
+    public String getImmagine() {
+        return immagine;
     }
 
-    public void setCosto(int costo) {
-        this.costo = costo;
+    public void setImmagine(String immagine) {
+        this.immagine = immagine;
     }
 }
