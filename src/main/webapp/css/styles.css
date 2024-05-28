@@ -1,0 +1,165 @@
+body {
+    margin: 0;
+    font-family: 'Georgia';
+    background-color: #fff;
+    color: #333;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #019FDC;
+    color: #fff;
+    position: relative; /* Per permettere il posizionamento assoluto */
+}
+
+.logo {
+    font-family: "Rage Italic";
+    color: white;
+    text-decoration: none;
+
+}
+
+.search-container {
+    display: flex;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Imposta una larghezza specifica per la barra di ricerca */
+    margin-right: 20px; /* Spazio tra la barra di ricerca e i bottoni */
+}
+
+.search-bar {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    flex: 1;
+}
+
+.search-button {
+    padding: 10px 20px;
+    background-color: red;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: darkred;
+}
+
+.nav-items {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 20px 0;
+    padding: 10px 0;
+    background-color: #019FDC;
+    border-radius: 5px;
+}
+
+.nav-items a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+}
+
+.nav-items a:hover {
+    color: red;
+}
+
+.intro, .featured-products {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.product {
+    flex: 1 1 calc(25% - 40px);
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.product:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.product-img {
+    max-width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.footer {
+    background-color: #019FDC;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.footer-nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.footer-nav a:hover {
+    color: red;
+}
+
+.featured-products h2 {
+    text-align: center;
+}
+
+/* Stili per i bottoni di accesso e carrello */
+.icon-access,
+.icon-cart {
+    padding: 20px;
+    text-decoration: none; /* Rimuove il sottolineato */
+    transition: filter 0.3s ease; /* Aggiungi una transizione per un cambiamento di filtro fluido */
+
+}
+
+.icon-img {
+    width: 24px; /* Imposta una dimensione appropriata per le icone */
+    height: 24px;
+    transition: filter 0.3s ease; /* Aggiungi una transizione per un cambiamento di filtro fluido */
+    filter:sepia(100%);
+}
+
+
+.icon-img:hover {
+    filter: invert(100%)  ;/*cambia quando gli passo il cursore sopra  */
+
+}
+
+/* Posiziona i bottoni a destra e in basso */
+.icon-container {
+    display: flex;
+    gap: 15px; /* Spazio tra le icone */
+}

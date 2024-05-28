@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>ModelloMVCdbAdmin</artifactId>
+    <artifactId>chierchia-zoccola_pj</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>ModelloMVCdbAdmin</name>
     <packaging>war</packaging>
