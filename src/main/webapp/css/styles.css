@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: 'Georgia';
+    font-family: 'Georgia', serif;
     background-color: #fff;
     color: #333;
 }
@@ -16,7 +16,7 @@ body {
 }
 
 .logo {
-    font-family: "Rage Italic";
+    font-family: "Rage Italic", serif;
     color: white;
     text-decoration: none;
 

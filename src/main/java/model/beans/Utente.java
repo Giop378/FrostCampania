@@ -1,5 +1,9 @@
 package model.beans;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 
 public class Utente {
@@ -48,7 +52,15 @@ public class Utente {
     }
 
     public void setPasswordhash(String passwordhash) {
-        this.passwordhash = passwordhash;
+        try {
+            MessageDigest digest =
+                    MessageDigest.getInstance("SHA-1");
+            digest.reset();
+            digest.update(passwordhash.getBytes(StandardCharsets.UTF_8));
+            this.passwordhash = String.format("%040x", new BigInteger(1, digest.digest()));
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public LocalDate getDataDiNascita() {
