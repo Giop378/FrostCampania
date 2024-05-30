@@ -21,7 +21,7 @@
   </div>
 
   <div class="icon-container">
-    <a href="#" class="icon-access aria-label="Accedi">
+    <a href="#" class="icon-access" aria-label="Accedi">
       <img src="./images/login.png" alt="Accedi" class="icon-img">
     </a>
     <a href="#" class="icon-cart" aria-label="Carrello">
