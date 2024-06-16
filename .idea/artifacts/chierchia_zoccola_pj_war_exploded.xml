@@ -1,0 +1,24 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="chierchia-zoccola_pj:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/chierchia_zoccola_pj_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="chierchia-zoccola_pj" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0" />
+          <element id="library" level="project" name="Maven: jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:2.0.0" />
+          <element id="library" level="project" name="Maven: jakarta.el:jakarta.el-api:4.0.0" />
+          <element id="library" level="project" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:3.0.0" />
+          <element id="library" level="project" name="Maven: com.sun.activation:jakarta.activation:2.0.0" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.28" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-jdbc:10.0.17" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-juli:10.0.17" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="chierchia-zoccola_pj/web/Web" />
+    </root>
+  </artifact>
+</component>

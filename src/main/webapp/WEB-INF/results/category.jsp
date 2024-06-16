@@ -1,0 +1,64 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: DomeA
+  Date: 16/06/2024
+  Time: 19:29
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="model.beans.Prodotto" %>
+<%@ page import="java.util.List" %>
+<%@ page import="model.beans.Categoria" %>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FrostCampania - Prodotti per Categoria</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/styles.css">
+</head>
+<body>
+<%@ include file="/WEB-INF/results/header.jsp" %>
+
+<div class="main">
+    <div class="nav-items">
+        <% List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
+            for (Categoria categoria : categorie) { %>
+        <a href="<%= request.getContextPath() %>/categoria?categoria=<%=categoria.getNome()%>" aria-label="<%=categoria.getNome()%>"><%=categoria.getNome()%></a>
+        <% } %>
+    </div>
+
+    <div class="intro">
+        <h1><%= request.getAttribute("nomeCategoria") %></h1>
+    </div>
+
+    <div class="category-image">
+        <img src="<%= request.getContextPath() %>/images/categoria/categoria<%= request.getAttribute("nomeCategoria").toString().toLowerCase() %>.png" alt="<%= request.getAttribute("nomeCategoria") %>" class="category-img">
+        <p class="category-description">
+            <%= ((Categoria) request.getAttribute("categoria")).getDescrizione() %>
+        </p>
+    </div>
+
+    <div class="featured-products">
+        <h2>PRODOTTI</h2>
+    <div class="product-list">
+        <% List<Prodotto> prodottiPerCategoria = (List<Prodotto>) request.getAttribute("prodottiPerCategoria");
+            for (Prodotto prodotto : prodottiPerCategoria) { %>
+        <div class="product">
+            <img src="<%= prodotto.getImmagine() %>" alt="<%= prodotto.getNome() %>" class="product-img">
+            <h3><%= prodotto.getNome() %></h3>
+            <p>Prezzo: <%= prodotto.getPrezzo() %>€</p>
+            <p>Descrizione: <%= prodotto.getDescrizione() %></p>
+            <div class="add-to-cart">
+                <input type="number" value="1" min="1" class="quantity-input">
+                <button class="add-to-cart-button">Aggiungi al carrello</button>
+            </div>
+        </div>
+        <% } %>
+    </div>
+</div>
+
+<%@ include file="/WEB-INF/results/footer.jsp" %>
+</body>
+</html>
+

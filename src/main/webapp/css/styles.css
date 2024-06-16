@@ -163,3 +163,25 @@ body {
     display: flex;
     gap: 15px; /* Spazio tra le icone */
 }
+
+.intro{
+    text-align: center;
+}
+
+.category-image{
+    text-align: center;
+}
+
+.add-to-cart-button {
+    padding: 10px 20px;
+    background-color: #019FDC;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart-button:hover {
+    background-color: darkblue;
+}
+
