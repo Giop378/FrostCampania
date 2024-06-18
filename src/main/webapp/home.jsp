@@ -31,7 +31,12 @@
             <div class="product">
                 <img src="<%= prodotto.getImmagine() %>" alt="<%= prodotto.getNome() %>" class="product-img">
                 <h3><%=prodotto.getNome()%></h3>
-                <p><%=prodotto.getPrezzo()%></p>
+                <p>Prezzo: <%= String.format("%.2f", prodotto.getPrezzo() / 100.0).replace('.', ',') %>€</p>
+                <p>Descrizione: <%= prodotto.getDescrizione() %></p>
+                <div class="add-to-cart">
+                    <input type="number" value="1" min="1" class="quantity-input">
+                    <button class="add-to-cart-button">Aggiungi al carrello</button>
+                </div>
             </div>
             <% } %>
         </div>

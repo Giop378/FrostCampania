@@ -13,7 +13,7 @@
 <body>
 <div class="header">
   <a href="#" class="logo" aria-label="Home">
-     <h1>FrostCampania</h1>
+    <img src="./images/logo.png" alt="FrostCampania Logo" class="logo-img">
   </a>
   <div class="search-container">
     <input type="text" placeholder="Cerca i nostri prodotti..." class="search-bar" aria-label="Search">

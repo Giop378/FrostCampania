@@ -15,16 +15,21 @@ body {
     position: relative; /* Per permettere il posizionamento assoluto */
 }
 
-.logo {
-    font-family: "Rage Italic", serif;
-    color: white;
-    text-decoration: none;
+.logo-img {
+    padding: 20px;
+    text-decoration: none; /* Rimuove il sottolineato */
+    transition: filter 0.3s ease; /* Aggiungi una transizione per un cambiamento di filtro fluido */
+    width: 100px; /* Imposta una dimensione appropriata per le icone */
+    height: 100px;
+}
 
+.logo-img:hover {
+    filter: invert(100%)  ;/*cambia quando gli passo il cursore sopra  */
 }
 
 .search-container {
     display: flex;
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -42,7 +47,7 @@ body {
 
 .search-button {
     padding: 10px 20px;
-    background-color: red;
+    background-color: darkblue;
     border: none;
     color: #fff;
     cursor: pointer;
@@ -149,7 +154,6 @@ body {
     width: 24px; /* Imposta una dimensione appropriata per le icone */
     height: 24px;
     transition: filter 0.3s ease; /* Aggiungi una transizione per un cambiamento di filtro fluido */
-    filter:sepia(100%);
 }
 
 
