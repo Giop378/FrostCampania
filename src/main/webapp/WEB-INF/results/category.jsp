@@ -14,12 +14,7 @@
 <%@ include file="/WEB-INF/results/header.jsp" %>
 
 <div class="main">
-    <div class="nav-items">
-        <% List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
-            for (Categoria categoria : categorie) { %>
-        <a href="<%= request.getContextPath() %>/categoria?categoria=<%=categoria.getNome()%>" aria-label="<%=categoria.getNome()%>"><%=categoria.getNome()%></a>
-        <% } %>
-    </div>
+
 
     <div class="intro">
         <% Categoria categoriaScelta=(Categoria) request.getAttribute("categoriaScelta");%>
@@ -43,7 +38,9 @@
             <div class="product">
                 <img src="<%= prodotto.getImmagine() %>" alt="<%= prodotto.getNome() %>" class="product-img">
                 <h3><%= prodotto.getNome() %></h3>
-                <p>Prezzo: <%= String.format("%.2f", prodotto.getPrezzo() / 100.0).replace('.', ',') %>€</p>
+                <p id="initial-price">Prezzo iniziale: <%= String.format("%.2f", prodotto.getPrezzo() / (100.0- prodotto.getSconto())).replace('.', ',') %>€</p>
+                <p>Sconto: <%= prodotto.getSconto()%>%</p>
+                <p>Prezzo scontato: <%= String.format("%.2f", prodotto.getPrezzo() / 100.0).replace('.', ',') %>€</p>
                 <p>Descrizione: <%= prodotto.getDescrizione() %></p>
                 <div class="add-to-cart">
                     <input type="number" value="1" min="1" class="quantity-input">

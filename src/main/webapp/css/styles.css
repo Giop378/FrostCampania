@@ -106,6 +106,10 @@ body {
     transition: box-shadow 0.3s ease;
 }
 
+#initial-price {
+    text-decoration: line-through;
+}
+
 .product:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }

@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="header">
-  <a href="#" class="logo" aria-label="Home">
+  <a href="index.html" class="logo" aria-label="Home">
     <img src="./images/logo.png" alt="FrostCampania Logo" class="logo-img">
   </a>
   <div class="search-container">
@@ -21,13 +21,19 @@
   </div>
 
   <div class="icon-container">
-    <a href="#" class="icon-access" aria-label="Accedi">
+    <a href="utente-servlet" class="icon-access" aria-label="Accedi">
       <img src="./images/login.png" alt="Accedi" class="icon-img">
     </a>
     <a href="#" class="icon-cart" aria-label="Carrello">
       <img src="./images/carrello.png" alt="Carrello" class="icon-img">
     </a>
   </div>
+</div>
+<div class="nav-items">
+  <% List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
+    for (Categoria categoria : categorie) { %>
+  <a href="categoria?categoria=<%=categoria.getNome()%>" aria-label="<%=categoria.getNome()%>" value="<%=categoria.getNome()%>"><%=categoria.getNome()%></a>
+  <% } %>
 </div>
 
 </body>

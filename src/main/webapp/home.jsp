@@ -13,12 +13,7 @@
 <%@ include file="./WEB-INF/results/header.jsp" %>
 
 <div class="main">
-    <div class="nav-items">
-        <% List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
-            for (Categoria categoria : categorie) { %>
-            <a href="categoria?categoria=<%=categoria.getNome()%>" aria-label="<%=categoria.getNome()%>" value="<%=categoria.getNome()%>"><%=categoria.getNome()%></a>
-        <% } %>
-    </div>
+
     <div class="intro">
         <h1>Benvenuto in FrostCampania</h1>
         <p>Scopri le nostre offerte esclusive sui prodotti surgelati di alta qualità.</p>
@@ -31,6 +26,8 @@
             <div class="product">
                 <img src="<%= prodotto.getImmagine() %>" alt="<%= prodotto.getNome() %>" class="product-img">
                 <h3><%=prodotto.getNome()%></h3>
+                <p id="initial-price">Prezzo iniziale: <%= String.format("%.2f", prodotto.getPrezzo() / (100.0- prodotto.getSconto())).replace('.', ',') %>€</p>
+                <p>Sconto: <%= prodotto.getSconto()%>%</p>
                 <p>Prezzo: <%= String.format("%.2f", prodotto.getPrezzo() / 100.0).replace('.', ',') %>€</p>
                 <p>Descrizione: <%= prodotto.getDescrizione() %></p>
                 <div class="add-to-cart">
