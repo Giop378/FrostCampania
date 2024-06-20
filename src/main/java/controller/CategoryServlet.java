@@ -34,13 +34,14 @@ public class CategoryServlet extends HttpServlet {
         List<Prodotto> prodottiPerCategoria = prodottoDAO.doRetrieveByCategory(nomeCategoria);
         List<Categoria> categorie = categoriaDAO.doRetrieveAll();
 
+        request.setAttribute("categorie", categorie);
+
         //cerca la categoria per nome
         Categoria categoriaScelta = findCategoriaByName(categorie, nomeCategoria);
 
         if (categoriaScelta != null) {
 
             request.setAttribute("prodottiPerCategoria", prodottiPerCategoria);
-            request.setAttribute("categorie", categorie);
             request.setAttribute("categoriaScelta", categoriaScelta);
 
 
@@ -49,6 +50,8 @@ public class CategoryServlet extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/category.jsp");
             dispatcher.forward(request, response);
         } else {
+            // Se non trova la categoria, reindirizza a una pagina di errore con un messaggio di errore
+            request.setAttribute("errorMessage", "La categoria specificata non è stata trovata.");
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/general-error.jsp");
             dispatcher.forward(request, response);
         }
