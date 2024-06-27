@@ -6,12 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <%@ page import="model.beans.Prodotto" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.beans.Categoria" %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <title>Title</title>
     <title>Errore generale</title>
     <link rel="stylesheet" href="./css/styles.css">
 </head>
@@ -25,11 +27,13 @@
 
     <p>Tornare alla <a href="index.html">pagina iniziale</a></p>
     <p> oppure </p>
-        <p>Contattare il nostro supporto tecnico se il problema persiste</p>
+    <p>Contattare il nostro supporto tecnico se il problema persiste</p>
 
     <p>Grazie per la tua pazienza e comprensione.</p>
 </div>
 <%@ include file="footer.jsp" %>
 </body>
 </html>
+
+
 

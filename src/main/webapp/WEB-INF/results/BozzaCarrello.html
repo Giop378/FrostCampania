@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrello</title>
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #019FDC;
+            color: #fff;
+            position: relative;
+        }
+
+        .logo-img {
+            padding: 20px;
+            text-decoration: none;
+            transition: filter 0.3s ease;
+            width: 100px;
+            height: 100px;
+        }
+
+        .logo-img:hover {
+            filter: invert(100%);
+        }
+
+        .search-container {
+            display: flex;
+            background-color: #ffffff;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin-right: 20px;
+        }
+
+        .search-bar {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            flex: 1;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            background-color: darkblue;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-button:hover {
+            background-color: darkred;
+        }
+
+        .icon-access,
+        .icon-cart {
+            padding: 20px;
+            text-decoration: none;
+            transition: filter 0.3s ease;
+        }
+
+        .icon-img {
+            width: 24px;
+            height: 24px;
+            transition: filter 0.3s ease;
+        }
+
+        .icon-img:hover {
+            filter: invert(100%);
+        }
+
+        .nav-items {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            padding: 10px 0;
+            background-color: #019FDC;
+            border-radius: 5px;
+        }
+
+        .nav-items a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .nav-items a:hover {
+            color: red;
+        }
+
+        .footer {
+            background-color: #019FDC;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav a:hover {
+            color: red;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1200px;
+            padding: 20px;
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+
+        .product {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .product-image {
+            width: 100px;
+            height: 100px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .product-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .product-details div {
+            flex: 1;
+        }
+
+        .product-quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .product-quantity input[type="number"] {
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        .product-quantity button {
+            padding: 5px 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .product-quantity button:hover {
+            background-color: darkred;
+        }
+
+        .product-weight-price {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .total {
+            text-align: right;
+            font-weight: bold;
+            padding-top: 10px;
+        }
+
+        .checkout {
+            margin-top: 40px; /* Aumentato il margine superiore per spostare il pulsante più in basso */
+            text-align: center;
+        }
+
+        .checkout button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .checkout button:hover {
+            background-color: darkred;
+        }
+
+        .shipping-total-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="#" class="logo" aria-label="Home">
+            <h1>FrostCampania</h1>
+        </a>
+        <div class="search-container">
+            <input type="text" placeholder="Cerca i nostri prodotti..." class="search-bar" aria-label="Search">
+            <button class="search-button" aria-label="Search Button">Cerca</button>
+        </div>
+        <div class="icon-container">
+            <a href="#" class="icon-access" aria-label="Accedi">
+                <img src="login.png" alt="Accedi" class="icon-img">
+            </a>
+            <a href="#" class="icon-cart" aria-label="Carrello">
+                <img src="carrello.png" alt="Carrello" class="icon-img">
+            </a>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="nav-items">
+            <a href="#" aria-label="Pesce">PESCE</a>
+            <a href="#" aria-label="Piatti Pronti">PIATTI PRONTI</a>
+            <a href="#" aria-label="Gelati">GELATI</a>
+            <a href="#" aria-label="Verdure">VERDURE</a>
+            <a href="#" aria-label="Offerte">OFFERTE</a>
+        </div>
+
+        <div class="container">
+            <h1 style="text-align: center;">Carrello</h1>
+            
+            <div class="product">
+                <div class="product-image">
+                    Foto
+                </div>
+                <div class="product-details">
+                    <div>Nome Prodotto 1</div>
+                    <div class="product-quantity">
+                        Quantità: <input type="number" value="1">
+                        <button>Rimuovi</button>
+                    </div>
+                </div>
+                <div class="product-weight-price">
+                    <div>Peso: 500g</div>
+                    <div class="product-price">
+                        <div>Prezzo: €10.00</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product">
+                <div class="product-image">
+                    Foto
+                </div>
+                <div class="product-details">
+                    <div>Nome Prodotto 2</div>
+                    <div class="product-quantity">
+                        Quantità: <input type="number" value="2">
+                        <button>Rimuovi</button>
+                    </div>
+                </div>
+                <div class="product-weight-price">
+                    <div>Peso: 300g</div>
+                    <div class="product-price">
+                        <div>Prezzo: €20.00</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product">
+                <div class="product-image">
+                    Foto
+                </div>
+                <div class="product-details">
+                    <div>Nome Prodotto 3</div>
+                    <div class="product-quantity">
+                        Quantità: <input type="number" value="1">
+                        <button>Rimuovi</button>
+                    </div>
+                </div>
+                <div class="product-weight-price">
+                    <div>Peso: 1kg</div>
+                    <div class="product-price">
+                        <div>Prezzo: €15.00</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="shipping-total-container">
+                <div class="shipping">
+                    <label for="shipping>
+                        <label for="shipping">Spedizione: </label>
+                        <select id="shipping">
+                            <option value="standard">Standard</option>
+                            <option value="express">Express</option>
+                        </select>
+                    </div>
+                    <div class="total">
+                        Prezzo Totale: €45.00
+                    </div>
+                </div>
+                
+                <div class="checkout">
+                    <button>Procedi con il checkout</button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="footer">
+            <p>© 2024 FrostCampania. Tutti i diritti riservati.</p>
+            <div class="footer-nav">
+                <a href="#" aria-label="Informazioni Legali">Informazioni Legali</a>
+                <a href="#" aria-label="Privacy Policy">Privacy Policy</a>
+                <a href="#" aria-label="Contatti">Contatti</a>
+            </div>
+        </div>
+    </body>
+    </html>
+    
+
+
+
+
+

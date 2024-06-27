@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FrostCampania - Prodotti per Categoria</title>
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/styles.css">
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
 <%@ include file="/WEB-INF/results/header.jsp" %>
@@ -36,12 +36,14 @@
             <% List<Prodotto> prodottiPerCategoria = (List<Prodotto>) request.getAttribute("prodottiPerCategoria");
                 for (Prodotto prodotto : prodottiPerCategoria) { %>
             <div class="product">
+                <a href="prodotto?id=<%= prodotto.getIdProdotto() %>">
                 <img src="<%= prodotto.getImmagine() %>" alt="<%= prodotto.getNome() %>" class="product-img">
-                <h3><%= prodotto.getNome() %></h3>
+                    <h3><%= prodotto.getNome() %></h3>
+                </a>
+
                 <p id="initial-price">Prezzo iniziale: <%= String.format("%.2f", prodotto.getPrezzo() / (100.0- prodotto.getSconto())).replace('.', ',') %>€</p>
                 <p>Sconto: <%= prodotto.getSconto()%>%</p>
-                <p>Prezzo scontato: <%= String.format("%.2f", prodotto.getPrezzo() / 100.0).replace('.', ',') %>€</p>
-                <p>Descrizione: <%= prodotto.getDescrizione() %></p>
+                <p>Prezzo: <%= String.format("%.2f", prodotto.getPrezzo() / 100.0).replace('.', ',') %>€</p>
                 <div class="add-to-cart">
                     <input type="number" value="1" min="1" class="quantity-input">
                     <button class="add-to-cart-button">Aggiungi al carrello</button>
@@ -49,8 +51,6 @@
             </div>
             <% } %>
         </div>
-    </div>
-
     <%@ include file="/WEB-INF/results/footer.jsp" %>
 </body>
 </html>

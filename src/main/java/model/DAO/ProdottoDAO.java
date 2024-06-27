@@ -106,7 +106,7 @@ public class ProdottoDAO {
     //Prende i dati di un singolo prodotto dal database
     public Prodotto doRetrieveById(int idProdotto){
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("select idProdotto, nome, prezzo, descrizione, immagine, vetrina, sconto, quantità, nomecategoria from prodotto where id=?");
+            PreparedStatement ps = con.prepareStatement("select idProdotto, nome, prezzo, descrizione, immagine, vetrina, sconto, quantità, nomecategoria from prodotto where idProdotto=?");
             ps.setInt(1, idProdotto);
             ResultSet rs = ps.executeQuery();
             if(rs.next()) {

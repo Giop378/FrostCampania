@@ -24,12 +24,14 @@
             <% List<Prodotto> prodottiVetrina = (List<Prodotto>) request.getAttribute("prodottiVetrina");
                 for (Prodotto prodotto : prodottiVetrina) { %>
             <div class="product">
-                <img src="<%= prodotto.getImmagine() %>" alt="<%= prodotto.getNome() %>" class="product-img">
-                <h3><%=prodotto.getNome()%></h3>
+                <a href="prodotto?id=<%= prodotto.getIdProdotto() %>">
+                    <img src="<%= prodotto.getImmagine() %>" alt="<%= prodotto.getNome() %>" class="product-img">
+                    <h3><%=prodotto.getNome()%></h3>
+                </a>
+
                 <p id="initial-price">Prezzo iniziale: <%= String.format("%.2f", prodotto.getPrezzo() / (100.0- prodotto.getSconto())).replace('.', ',') %>€</p>
                 <p>Sconto: <%= prodotto.getSconto()%>%</p>
                 <p>Prezzo: <%= String.format("%.2f", prodotto.getPrezzo() / 100.0).replace('.', ',') %>€</p>
-                <p>Descrizione: <%= prodotto.getDescrizione() %></p>
                 <div class="add-to-cart">
                     <input type="number" value="1" min="1" class="quantity-input">
                     <button class="add-to-cart-button">Aggiungi al carrello</button>

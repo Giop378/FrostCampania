@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>footer</title>
+    <link rel="stylesheet" href="./css/footer.css">
 </head>
 <body>
 <div class="footer">
