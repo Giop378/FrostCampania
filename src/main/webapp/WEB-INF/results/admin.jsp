@@ -25,7 +25,7 @@
 </div>
 <h1>Area Amministratore</h1>
 <div class="button-container">
-    <button onclick="location.href='gestione-catalogo.jsp'">Gestione Catalogo</button>
+    <button onclick="location.href='admin-choice-servlet?choice=addproduct'">Aggiungi Prodotto</button>
     <button onclick="location.href='visualizza-ordini.jsp'">Visualizza Ordini</button>
     <button onclick="location.href='visualizza-cliente.jsp'">Visualizza Cliente</button>
     <button onclick="location.href='logout.jsp'">Esci</button>

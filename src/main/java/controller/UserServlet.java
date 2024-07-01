@@ -8,29 +8,27 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.DAO.CategoriaDAO;
-import model.DAO.UtenteDAO;
 import model.beans.Categoria;
 import model.beans.Utente;
 
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/utente-servlet")
-public class UtenteServlet extends HttpServlet {
+@WebServlet("/user-servlet")
+public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        CategoriaDAO categoriaDAO = new CategoriaDAO();
-        List<Categoria> categorie = categoriaDAO.doRetrieveAll();
-        request.setAttribute("categorie", categorie);
         String action = request.getParameter("action");
-        if(request.getSession().getAttribute("utente") == null && !"register".equals(action) ){
+        HttpSession session = request.getSession();
+        Utente utente =(Utente) session.getAttribute("utente");
+        if(utente == null ){//caso in cui l'utente non ha ancora fatto l'accesso ma deve fare la login
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/login.jsp");
             requestDispatcher.forward(request, response);
-        }else if (request.getSession().getAttribute("utente") == null && "register".equals(action)==true){
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/register.jsp");
+        }else if (utente.isAdminCheck()){//caso in cui l'utente è già loggato ed è un admin
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/admin.jsp");
             requestDispatcher.forward(request, response);
-        }else{
-            //si dovranno aggiungere i valori da passare a profilo.jsp
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/profilo.jsp");
+        }else if (!utente.isAdminCheck()){//caso in cui l'utente non è un admin
+            session.setAttribute("utente", utente);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/profile.jsp");
             requestDispatcher.forward(request, response);
         }
 

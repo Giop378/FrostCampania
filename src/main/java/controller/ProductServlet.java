@@ -23,17 +23,11 @@ public class ProductServlet extends HttpServlet {
 
         int  idProdotto = Integer.parseInt(request.getParameter("id"));
         ProdottoDAO prodottoDAO = new ProdottoDAO();
-        CategoriaDAO categoriaDAO = new CategoriaDAO();
-        List<Categoria> categorie = categoriaDAO.doRetrieveAll();
 
-        //cerca il prodotto per id
         Prodotto prodotto = prodottoDAO.doRetrieveById(idProdotto);
-        request.setAttribute("categorie", categorie);
 
         if (prodotto != null) {
             request.setAttribute("prodotto", prodotto);
-
-            // Inoltra la richiesta alla JSP del prodotto trovato
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/product.jsp");
             dispatcher.forward(request, response);
         } else {

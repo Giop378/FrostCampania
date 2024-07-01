@@ -132,16 +132,15 @@ public class ProdottoDAO {
     //Salva un prodotto nel database
     public void doSave(Prodotto prodotto){
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO prodotto (idProdotto, nome, prezzo, descrizione, immagine, vetrina, sconto, quantità, nomecategoria) VALUES(?,?,?,?,?,?,?,?,?)");
-            ps.setInt(1, prodotto.getIdProdotto());
-            ps.setString(2, prodotto.getNome());
-            ps.setInt(3, prodotto.getPrezzo());
-            ps.setString(4, prodotto.getDescrizione());
-            ps.setString(5, prodotto.getImmagine());
-            ps.setBoolean(6, prodotto.isVetrina());
-            ps.setInt(7, prodotto.getSconto());
-            ps.setInt(8, prodotto.getQuantità());
-            ps.setString(9, prodotto.getNomeCategoria());
+            PreparedStatement ps = con.prepareStatement("INSERT INTO prodotto (nome, prezzo, descrizione, immagine, vetrina, sconto, quantità, nomecategoria) VALUES(?,?,?,?,?,?,?,?)");
+            ps.setString(1, prodotto.getNome());
+            ps.setInt(2, prodotto.getPrezzo());
+            ps.setString(3, prodotto.getDescrizione());
+            ps.setString(4, prodotto.getImmagine());
+            ps.setBoolean(5, prodotto.isVetrina());
+            ps.setInt(6, prodotto.getSconto());
+            ps.setInt(7, prodotto.getQuantità());
+            ps.setString(8, prodotto.getNomeCategoria());
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");

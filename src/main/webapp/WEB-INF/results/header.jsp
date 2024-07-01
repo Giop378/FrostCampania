@@ -22,7 +22,7 @@
   </div>
 
   <div class="icon-container">
-    <a href="utente-servlet" class="icon-access" aria-label="Accedi">
+    <a href="user-servlet" class="icon-access" aria-label="Accedi">
       <img src="./images/login.png" alt="Accedi" class="icon-img">
     </a>
     <a href="#" class="icon-cart" aria-label="Carrello">
@@ -31,7 +31,7 @@
   </div>
 </div>
 <div class="nav-items">
-  <% List<Categoria> categorie = (List<Categoria>) request.getAttribute("categorie");
+  <% List<Categoria> categorie = (List<Categoria>) application.getAttribute("categorie");
     for (Categoria categoria : categorie) { %>
   <a href="categoria?categoria=<%=categoria.getNome()%>" aria-label="<%=categoria.getNome()%>" value="<%=categoria.getNome()%>"><%=categoria.getNome()%></a>
   <% } %>

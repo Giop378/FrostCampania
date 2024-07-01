@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background-color: #f3f4f6;
+    color: #333;
+}
+
+.profile-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-header h2 {
+    color: #019FDC;
+    font-size: 2em;
+    margin: 0;
+}
+
+.profile-info {
+    margin-bottom: 30px;
+}
+
+.profile-info div {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.profile-info div strong {
+    color: #019FDC;
+}
+
+.profile-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-button {
+    padding: 10px 20px;
+    background-color: #019FDC;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 5px;
+    font-size: 1em;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-button:hover {
+    background-color: darkblue;
+    transform: translateY(-2px);
+}
+
+.profile-button:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+    .profile-container {
+        padding: 20px;
+    }
+
+    .profile-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .profile-button {
+        width: 100%;
+        text-align: center;
+    }
+}

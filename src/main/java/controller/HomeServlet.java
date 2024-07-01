@@ -16,10 +16,7 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ProdottoDAO prodottoDAO = new ProdottoDAO();
-        CategoriaDAO categoriaDAO = new CategoriaDAO();
         List<Prodotto> prodottiVetrina = prodottoDAO.doRetrieveVetrina();
-        List<Categoria> categorie = categoriaDAO.doRetrieveAll();
-        request.setAttribute("categorie", categorie);
         request.setAttribute("prodottiVetrina", prodottiVetrina);
         RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
         dispatcher.forward(request, response);
