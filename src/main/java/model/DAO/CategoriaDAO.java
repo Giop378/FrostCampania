@@ -37,6 +37,25 @@ public class CategoriaDAO {
             throw new RuntimeException(e);
         }
     }
+    //restituisce un oggetto categoria dando il nome
+    public Categoria doRetrieveByNomeCategoria(String nomeCategoria){
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM Categoria WHERE nome = ?");
+            ps.setString(1, nomeCategoria);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Categoria c = new Categoria();
+
+                c.setNome(rs.getString(1));
+                c.setDescrizione(rs.getString(2));
+                c.setImmagine(rs.getString(3));
+                return c;
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     //Salva una categoria
     public void doSave(Categoria categoria){
         try (Connection con = ConPool.getConnection()) {

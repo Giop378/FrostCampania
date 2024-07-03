@@ -11,21 +11,21 @@ body {
 
 .logo-img {
     padding: 20px;
-    text-decoration: none; /* Rimuove il sottolineato */
-    transition: filter 0.3s ease; /* Aggiungi una transizione per un cambiamento di filtro fluido */
-    width: 100px; /* Imposta una dimensione appropriata per le icone */
+    text-decoration: none;
+    transition: filter 0.3s ease;
+    width: 100px;
     height: 100px;
 }
 
 .logo-img:hover {
-    filter: invert(100%)  ;/*cambia quando gli passo il cursore sopra  */
+    filter: invert(100%);
 }
 
 .header-admin {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content:left;
+    justify-content: left;
     padding: 20px 0;
     background-color: #019FDC;
     color: #fff;
@@ -38,7 +38,7 @@ form {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     max-width: 600px;
-    text-align: left; /* Per allineare il testo a sinistra */
+    text-align: left;
 }
 
 label {
@@ -52,7 +52,8 @@ input[type="text"],
 input[type="number"],
 input[type="file"],
 input[type="checkbox"],
-input[type="submit"] {
+input[type="submit"],
+select {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
@@ -73,4 +74,24 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: darkblue;
+}
+
+select {
+    background-color: #fff;
+    color: #555;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+select:focus {
+    outline: none;
+    border-color: #019FDC;
+}
+
+option {
+    padding: 8px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #555;
 }

@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+import model.DAO.CategoriaDAO;
 import model.DAO.ProdottoDAO;
 import model.beans.Prodotto;
 
@@ -28,7 +29,7 @@ public class AddProductServlet extends HttpServlet {
     private static final long MAX_FILE_SIZE = 1024 * 1024 * 10; // 10 MB
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        CategoriaDAO categoriaDAO = new CategoriaDAO();
         Prodotto nuovoProdotto = new Prodotto();
         try {
             String nome = request.getParameter("nome");
@@ -38,6 +39,12 @@ public class AddProductServlet extends HttpServlet {
             int sconto = Integer.parseInt(request.getParameter("sconto"));
             int quantita = Integer.parseInt(request.getParameter("quantita"));
             String nomeCategoria = request.getParameter("nomecategoria");
+            if(categoriaDAO.doRetrieveByNomeCategoria(nomeCategoria)==null){
+                throw new ServletException("Categoria non esistente");
+                //request.setAttribute("errorMessage", "Categoria non esistente") ;
+                //RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/general-error.jsp");
+                //dispatcher.forward(request, response);
+            }
             nuovoProdotto.setNomeCategoria(nomeCategoria);
             nuovoProdotto.setPrezzo(prezzo);
             nuovoProdotto.setSconto(sconto);
@@ -50,6 +57,7 @@ public class AddProductServlet extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/general-error.jsp");
             dispatcher.forward(request, response);
         }
+
 
         Part filePart = request.getPart("file");
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();

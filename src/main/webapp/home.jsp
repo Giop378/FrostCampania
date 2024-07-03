@@ -33,8 +33,11 @@
                 <p>Sconto: <%= prodotto.getSconto()%>%</p>
                 <p>Prezzo: <%= String.format("%.2f", prodotto.getPrezzo() / 100.0).replace('.', ',') %>€</p>
                 <div class="add-to-cart">
-                    <input type="number" value="1" min="1" class="quantity-input">
-                    <button class="add-to-cart-button">Aggiungi al carrello</button>
+                    <form action="add-product-cart" method="post">
+                        <input type="hidden" name="idProdotto" value="<%= prodotto.getIdProdotto() %>">
+                        <input type="number" name="quantità" value="1" min="1" class="quantity-input">
+                        <button type="submit" class="add-to-cart-button">Aggiungi al carrello</button>
+                    </form>
                 </div>
             </div>
             <% } %>

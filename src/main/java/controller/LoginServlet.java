@@ -6,14 +6,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.DAO.CarrelloDAO;
 import model.DAO.CategoriaDAO;
 import model.DAO.UtenteDAO;
+import model.beans.Carrello;
 import model.beans.Categoria;
 import model.beans.Utente;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/login-servlet")
 public class LoginServlet extends HttpServlet {
@@ -67,8 +71,14 @@ public class LoginServlet extends HttpServlet {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/admin.jsp");
                 requestDispatcher.forward(request, response);
             } else{//se l'utente esiste e non è admin deve andare alla pagina profilo utente
+                //questa parte si occupa di prendere i prodotti del carrello da DB e unirli con quelli in sessione
+                List<Carrello> carrelloSession = (List<Carrello>) request.getSession().getAttribute("carrello");
+                CarrelloDAO carrelloDAO = new CarrelloDAO();
+                List<Carrello> carrelloDB = carrelloDAO.doRetrieveByIdUtente(utenteSession.getIdUtente());
+                mergeCarrello(carrelloDB, carrelloSession);
+                request.getSession().setAttribute("carrello", carrelloDB);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/profile.jsp");
-            requestDispatcher.forward(request, response);
+                requestDispatcher.forward(request, response);
             }
         } else {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/general-error.jsp");
@@ -80,5 +90,24 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
+    }
+
+    private void mergeCarrello(List<Carrello> carrelloDB, List<Carrello> carrelloSession) {
+        Map<Integer, Carrello> map = new HashMap<>();
+
+        for (Carrello carrello : carrelloDB) {
+            map.put(carrello.getIdProdotto(), carrello);
+        }
+
+        for (Carrello carrello : carrelloSession) {
+            Carrello existingCarrello = map.get(carrello.getIdProdotto());
+
+            if (existingCarrello == null) {
+                carrelloDB.add(carrello);
+            } else {
+                int totalQuantita = existingCarrello.getQuantità() + carrello.getQuantità();
+                existingCarrello.setQuantità(totalQuantita);
+            }
+        }
     }
 }

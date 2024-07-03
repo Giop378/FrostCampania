@@ -21,6 +21,9 @@ public class CarrelloDAO {
                 carrello.setIdUtente(rs.getInt("IdUtente"));
                 carrello.setIdProdotto(rs.getInt("IdProdotto"));
                 carrello.setQuantità(rs.getInt("quantità"));
+                carrello.setImmagineProdotto(rs.getString("immagineProdotto"));
+                carrello.setNomeProdotto(rs.getString("nomeProdotto"));
+                carrello.setPrezzoProdotto(rs.getInt("prezzoProdotto"));
                 carrelli.add(carrello);
             }
         } catch (SQLException e) {
@@ -33,11 +36,14 @@ public class CarrelloDAO {
         try (Connection con = ConPool.getConnection()) {
             for (Carrello carrello : carrelli) {
                 PreparedStatement ps = con.prepareStatement(
-                        "INSERT INTO carrello (IdUtente, IdProdotto, quantità) VALUES(?,?,?)"
+                        "INSERT INTO carrello (IdUtente, IdProdotto, quantità,immagineProdotto, nomeProdotto, prezzoProdotto) VALUES(?,?,?,?,?,?)"
                 );
                 ps.setInt(1, carrello.getIdUtente());
                 ps.setInt(2, carrello.getIdProdotto());
                 ps.setInt(3, carrello.getQuantità());
+                ps.setString(4, carrello.getImmagineProdotto());
+                ps.setString(5, carrello.getNomeProdotto());
+                ps.setInt(6, carrello.getPrezzoProdotto());
                 if (ps.executeUpdate() != 1) {
                     throw new RuntimeException("INSERT error.");
                 }

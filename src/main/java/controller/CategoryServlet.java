@@ -45,10 +45,9 @@ public class CategoryServlet extends HttpServlet {
             dispatcher.forward(request, response);
         } else {
             // Se non trova la categoria, reindirizza a una pagina di errore con un messaggio di errore
-            request.setAttribute("errorMessage", "La categoria specificata non è stata trovata.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/general-error.jsp");
-            dispatcher.forward(request, response);
+            throw new ServletException("La categoria non è stata trovata");
         }
+        Prodotto p = new Prodotto();
     }
 
     @Override

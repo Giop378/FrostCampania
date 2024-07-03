@@ -1,4 +1,5 @@
-<%--
+<%@ page import="model.beans.Categoria" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: pomic
   Date: 22/06/2024
@@ -37,8 +38,13 @@
     <label for="quantita">Quantità:</label>
     <input type="number" id="quantita" name="quantita" required><br>
 
-    <label for="nomecategoria">Nome Categoria:</label>
-    <input type="text" id="nomecategoria" name="nomecategoria" required><br>
+    <label for="categoria">Categoria:</label>
+    <select id="categoria" name="nomecategoria" required>
+        <% List<Categoria> categorie = (List<Categoria>) application.getAttribute("categorie");
+            for (Categoria categoria : categorie) { %>
+                <option  value="<%=categoria.getNome()%>"><%=categoria.getNome()%></option>
+        <% } %>
+    </select><br>
 
     <label for="file">File da caricare:</label>
     <input type="file" id="file" name="file" required><br>

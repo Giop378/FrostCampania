@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="model.beans.Categoria" %>
 <html>
 <head>
     <title>header</title>
@@ -25,7 +26,7 @@
     <a href="user-servlet" class="icon-access" aria-label="Accedi">
       <img src="./images/login.png" alt="Accedi" class="icon-img">
     </a>
-    <a href="#" class="icon-cart" aria-label="Carrello">
+    <a href="carrello" class="icon-cart" aria-label="Carrello">
       <img src="./images/carrello.png" alt="Carrello" class="icon-img">
     </a>
   </div>
