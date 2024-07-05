@@ -32,9 +32,7 @@ public class ProductServlet extends HttpServlet {
             dispatcher.forward(request, response);
         } else {
             // Se il prodotto non è trovato, mostra un messaggio di errore generale
-            request.setAttribute("errorMessage", "Il prodotto specificato non è stato trovato.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/general-error.jsp");
-            dispatcher.forward(request, response);
+            throw new MyServletException("Il prodotto specificato non è stato trovato.");
         }
     }
 

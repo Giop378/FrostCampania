@@ -20,13 +20,19 @@
         </div>
         <div class="product-details">
             <div><%= prodottoCarrello.getNomeProdotto() %></div>
+        </div>
+        <div class="product-action">
             <div class="product-quantity">
                 Quantità: <input type="number" value="<%= prodottoCarrello.getQuantità() %>">
-                <button>Rimuovi</button>
+                <button type="submit" class="update-button">Modifica Quantità</button>
+                <form action="remove-product-cart" method="post" >
+                    <input type="hidden" name="idProdotto" value="<%= prodottoCarrello.getIdProdotto() %>">
+                    <button type="submit" class="remove-button">Rimuovi</button>
+                </form>
             </div>
-        </div>
-        <div class="product-price">
-            <div>Prezzo: <%= String.format("%.2f", prodottoCarrello.getPrezzoProdotto() / 100.0).replace('.', ',') %></div>
+            <div class="product-price">
+                Prezzo: <%= String.format("%.2f", prodottoCarrello.getPrezzoProdotto() / 100.0).replace('.', ',') %>
+            </div>
         </div>
     </div>
     <% } %>
@@ -51,6 +57,8 @@
 <%@ include file="/WEB-INF/results/footer.jsp" %>
 </body>
 </html>
+
+
     
 
 

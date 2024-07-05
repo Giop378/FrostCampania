@@ -13,6 +13,9 @@ body {
 }
 
 .product {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid #ccc;
     padding-bottom: 10px;
     margin-bottom: 10px;
@@ -33,23 +36,23 @@ body {
 
 .product-img {
     width: 100%;
-
 }
 
 .product-details {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+    flex: 1;
+    margin-right: 20px;
 }
 
-.product-details div {
-    flex: 1;
+.product-action {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .product-quantity {
     display: flex;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .product-quantity input[type="number"] {
@@ -65,17 +68,30 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    display: inline;
 }
 
-.product-quantity button:hover {
+.product-quantity .update-button {
+    padding: 5px 10px;
+    background-color: #019FDC;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+.product-quantity .update-button:hover {
+    background-color: darkblue;
+}
+
+.product-quantity .remove-button:hover {
     background-color: darkred;
 }
 
-
 .product-price {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    font-weight: bold;
 }
 
 .total {
@@ -110,3 +126,4 @@ body {
     margin-top: 20px;
     padding-top: 10px;
 }
+
