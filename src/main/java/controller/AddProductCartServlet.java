@@ -23,20 +23,25 @@ public class AddProductCartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         List<Carrello> carrelloSession = (List<Carrello>) session.getAttribute("carrello");
-        if (carrelloSession==null) {
-            carrelloSession = new ArrayList<Carrello>();
+        if (carrelloSession == null) {
+            carrelloSession = new ArrayList<>();
             session.setAttribute("carrello", carrelloSession);
         }
+
         ProdottoDAO prodottoDAO = new ProdottoDAO();
-        //si prendere l'id passato dal client e prende tramite dao il relativo prodotto
+        // Si prende l'id passato dal client e si recupera tramite DAO il relativo prodotto
         Prodotto p = prodottoDAO.doRetrieveById(Integer.parseInt(request.getParameter("idProdotto")));
         int quantità = Integer.parseInt(request.getParameter("quantità"));
-        //ora si prende il prodotto e la quantità e si crea un oggetto carrello da aggiungere in sessione alla restante lista
+
+        // Crea un nuovo oggetto Carrello
         Carrello carrello = new Carrello();
-        if(session.getAttribute("utente")==null){
+        if (session.getAttribute("utente") == null) {
             carrello.setIdUtente(null);
-        }else{
+        } else {
             Utente utente = (Utente) session.getAttribute("utente");
+            if(utente.isAdminCheck()){
+                throw new MyServletException("L'admin non può interagire con il carrello");
+            }
             int idUtente = utente.getIdUtente();
             carrello.setIdUtente(idUtente);
         }
@@ -45,7 +50,23 @@ public class AddProductCartServlet extends HttpServlet {
         carrello.setNomeProdotto(p.getNome());
         carrello.setIdProdotto(p.getIdProdotto());
         carrello.setQuantità(quantità);
-        carrelloSession.add(carrello);
+
+        // Controlla se il prodotto è già presente nel carrello
+        boolean prodottoTrovato = false;
+        for (Carrello item : carrelloSession) {
+            if (item.getIdProdotto() == carrello.getIdProdotto()) {
+                // Aggiorna la quantità del prodotto esistente
+                item.setQuantità(item.getQuantità() + quantità);
+                prodottoTrovato = true;
+                break;
+            }
+        }
+
+        // Se il prodotto non è trovato, aggiungilo al carrello
+        if (!prodottoTrovato) {
+            carrelloSession.add(carrello);
+        }
+
         session.setAttribute("carrello", carrelloSession);
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/cart.jsp");

@@ -118,12 +118,3 @@ body {
 .checkout button:hover {
     background-color: darkred;
 }
-
-.shipping-total-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-    padding-top: 10px;
-}
-

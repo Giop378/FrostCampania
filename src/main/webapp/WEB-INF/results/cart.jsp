@@ -12,8 +12,12 @@
 <body>
 <%@ include file="/WEB-INF/results/header.jsp" %>
 <div class="container">
-    <% List<Carrello> carrello = (List<Carrello>) session.getAttribute("carrello");
-        for(Carrello prodottoCarrello : carrello){ %>
+    <%
+        List<Carrello> carrello = (List<Carrello>) session.getAttribute("carrello");
+        double prezzoTotale = 0.0;
+        for(Carrello prodottoCarrello : carrello){
+            prezzoTotale += prodottoCarrello.getPrezzoProdotto() * prodottoCarrello.getQuantità();
+    %>
     <div class="product">
         <div class="product-image">
             <img src="<%= prodottoCarrello.getImmagineProdotto() %>" alt="<%= prodottoCarrello.getNomeProdotto() %>" class="product-img">
@@ -25,33 +29,28 @@
             <div class="product-quantity">
                 Quantità: <input type="number" value="<%= prodottoCarrello.getQuantità() %>">
                 <button type="submit" class="update-button">Modifica Quantità</button>
-                <form action="remove-product-cart" method="post" >
+                <form action="remove-product-cart" method="post">
                     <input type="hidden" name="idProdotto" value="<%= prodottoCarrello.getIdProdotto() %>">
                     <button type="submit" class="remove-button">Rimuovi</button>
                 </form>
             </div>
             <div class="product-price">
-                Prezzo: <%= String.format("%.2f", prodottoCarrello.getPrezzoProdotto() / 100.0).replace('.', ',') %>
+                Prezzo: €<%= String.format("%.2f", prodottoCarrello.getPrezzoProdotto() / 100.0).replace('.', ',') %>
             </div>
         </div>
     </div>
     <% } %>
 
-    <div class="shipping-total-container">
-        <div class="shipping">
-            <label for="shipping">Spedizione: </label>
-            <select id="shipping">
-                <option value="standard">Standard</option>
-                <option value="express">Express</option>
-            </select>
-        </div>
+    <div class="total-container">
         <div class="total">
-            Prezzo Totale: €45.00
+            Prezzo Totale: €<%= String.format("%.2f", prezzoTotale / 100.0).replace('.', ',') %>
         </div>
     </div>
 
     <div class="checkout">
-        <button>Procedi con il checkout</button>
+        <form action="checkout-servlet" method="post">
+            <button type="submit">Procedi con il checkout</button>
+        </form>
     </div>
 </div>
 <%@ include file="/WEB-INF/results/footer.jsp" %>

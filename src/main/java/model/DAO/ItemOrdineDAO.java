@@ -17,14 +17,16 @@ public class ItemOrdineDAO {
     public void doSave(ItemOrdine itemOrdine) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO itemordine (prezzo, quantità, sconto, IdProdotto, IdOrdine) " +
-                            "VALUES (?, ?, ?, ?, ?)");
+                    "INSERT INTO itemordine (nome, immagine, prezzo, quantità, sconto, IdProdotto, IdOrdine) " +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?)");
 
-            ps.setInt(1, itemOrdine.getPrezzo());
-            ps.setInt(2, itemOrdine.getQuantità());
-            ps.setInt(3, itemOrdine.getSconto());
-            ps.setInt(4, itemOrdine.getIdProdotto());
-            ps.setInt(5, itemOrdine.getIdOrdine());
+            ps.setString(1, itemOrdine.getNome());
+            ps.setString(2, itemOrdine.getImmagine());
+            ps.setInt(3, itemOrdine.getPrezzo());
+            ps.setInt(4, itemOrdine.getQuantità());
+            ps.setInt(5, itemOrdine.getSconto());
+            ps.setInt(6, itemOrdine.getIdProdotto());
+            ps.setInt(7, itemOrdine.getIdOrdine());
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
@@ -40,7 +42,7 @@ public class ItemOrdineDAO {
         try (Connection con = ConPool.getConnection()) {
 
             PreparedStatement ps = con.prepareStatement(
-                    "SELECT IdItemOrdine, prezzo, quantità, sconto, IdProdotto, IdOrdine " +
+                    "SELECT IdItemOrdine, nome, immagine, prezzo, quantità, sconto, IdProdotto, IdOrdine " +
                             "FROM itemordine " +
                             "WHERE IdOrdine = ?");
 
@@ -51,11 +53,13 @@ public class ItemOrdineDAO {
             while (rs.next()) {
                 ItemOrdine itemOrdine = new ItemOrdine();
                 itemOrdine.setIdItemOrdine(rs.getInt(1));
-                itemOrdine.setPrezzo(rs.getInt(2));
-                itemOrdine.setQuantità(rs.getInt(3));
-                itemOrdine.setSconto(rs.getInt(4));
-                itemOrdine.setIdProdotto(rs.getInt(5));
-                itemOrdine.setIdOrdine(rs.getInt(6));
+                itemOrdine.setNome(rs.getString(2));
+                itemOrdine.setImmagine(rs.getString(3));
+                itemOrdine.setPrezzo(rs.getInt(4));
+                itemOrdine.setQuantità(rs.getInt(5));
+                itemOrdine.setSconto(rs.getInt(6));
+                itemOrdine.setIdProdotto(rs.getInt(7));
+                itemOrdine.setIdOrdine(rs.getInt(8));
 
                 itemOrdini.add(itemOrdine);
             }

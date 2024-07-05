@@ -15,6 +15,7 @@ import model.beans.Utente;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,10 +63,10 @@ public class LoginServlet extends HttpServlet {
             UtenteDAO utenteDAO = new UtenteDAO();
             Utente utente = utenteDAO.doRetrieveByEmailPassword(email, password);
             request.getSession().setAttribute("utente", utente);
-            if ( utente == null ) {//nel caso provo a fare login ma l'utente non esiste lo si manda a una pagina di errore
-                String errorMessage = "Utente non esistente";
-                request.setAttribute("errorMessage", errorMessage);
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/general-error.jsp");
+            if ( utente == null ) {//nel caso provo a fare login ma l'utente non esiste lo si rimanda alla pagina di login
+                //String errorMessage = "Utente non esistente";
+                //request.setAttribute("errorMessage", errorMessage);
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/login.jsp");
                 requestDispatcher.forward(request, response);
             } else if ( utente.isAdminCheck() ) {//se l'utente esiste nel database ed è admin deve andare alla pagina admin
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/admin.jsp");
@@ -74,7 +75,7 @@ public class LoginServlet extends HttpServlet {
                 //questa parte si occupa di prendere i prodotti del carrello da DB e unirli con quelli in sessione
                 List<Carrello> carrelloSession = (List<Carrello>) request.getSession().getAttribute("carrello");
                 CarrelloDAO carrelloDAO = new CarrelloDAO();
-                List<Carrello> carrelloDB = carrelloDAO.doRetrieveByIdUtente(utenteSession.getIdUtente());
+                List<Carrello> carrelloDB = carrelloDAO.doRetrieveByIdUtente(utente.getIdUtente());
                 mergeCarrello(carrelloDB, carrelloSession);
                 request.getSession().setAttribute("carrello", carrelloDB);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/profile.jsp");
@@ -94,7 +95,13 @@ public class LoginServlet extends HttpServlet {
 
     private void mergeCarrello(List<Carrello> carrelloDB, List<Carrello> carrelloSession) {
         Map<Integer, Carrello> map = new HashMap<>();
-
+        //per evitare di avere errori se una delle due liste è null la inizializzo come lista vuota
+        if (carrelloDB == null) {
+            carrelloDB = new ArrayList<>();
+        }
+        if (carrelloSession == null) {
+            carrelloSession = new ArrayList<>();
+        }
         for (Carrello carrello : carrelloDB) {
             map.put(carrello.getIdProdotto(), carrello);
         }

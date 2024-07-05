@@ -26,11 +26,19 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+        Utente utente = (Utente) session.getAttribute("utente");
+        if(utente!=null) {
+            if ( utente.isAdminCheck() ) {
+                throw new MyServletException("L'admin non può interagire con il carrello");
+            }
+        }
         List<Carrello> carrello = (List<Carrello>) session.getAttribute("carrello");
         if (carrello==null) {
             carrello = new ArrayList<Carrello>();
             session.setAttribute("carrello", carrello);
         }
+
+
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/cart.jsp");
         requestDispatcher.forward(request, response);
     }
