@@ -50,10 +50,13 @@ public class LoginServlet extends HttpServlet {
             utente.setDataDiNascita(dataDiNascita);
             utente.setAdminCheck(admin);
 
-            request.getSession().setAttribute("utente", utente);
-
             UtenteDAO utenteDAO = new UtenteDAO();
-            utenteDAO.doSave(utente);
+            int idUtente = utenteDAO.doSave(utente);
+
+            //Cambio l'id dei prodotti del carrello che sono ancora null e li imposto con il nuovo id utente
+            utente.setIdUtente(idUtente);
+
+            request.getSession().setAttribute("utente", utente);
 
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/profile.jsp");
             requestDispatcher.forward(request, response);
@@ -74,8 +77,15 @@ public class LoginServlet extends HttpServlet {
             } else{//se l'utente esiste e non è admin deve andare alla pagina profilo utente
                 //questa parte si occupa di prendere i prodotti del carrello da DB e unirli con quelli in sessione
                 List<Carrello> carrelloSession = (List<Carrello>) request.getSession().getAttribute("carrello");
+                if(carrelloSession == null){
+                   carrelloSession = new ArrayList<Carrello>();
+                }
                 CarrelloDAO carrelloDAO = new CarrelloDAO();
                 List<Carrello> carrelloDB = carrelloDAO.doRetrieveByIdUtente(utente.getIdUtente());
+                //prima di unire i due carrelli devo impostare l'id utente ai vari prodotti del carrello che al momento sono ancora null perchè sono stati aggiunti prima del login
+                for(Carrello carrello : carrelloSession){
+                    carrello.setIdUtente(utente.getIdUtente());
+                }
                 mergeCarrello(carrelloDB, carrelloSession);
                 request.getSession().setAttribute("carrello", carrelloDB);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/profile.jsp");

@@ -4,10 +4,7 @@ import model.beans.ConPool;
 import model.beans.MetodoPagamento;
 import model.beans.Ordine;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +36,7 @@ public class OrdineDAO {
                 c.setCognome(rs.getString(7));
                 c.setVia(rs.getString((8)));
                 c.setTelefono(rs.getString(9));
-                c.setNomeMetodoPagaamneto(rs.getString(10));
+                c.setNomeMetodoPagamento(rs.getString(10));
                 c.setNomeMetodoSpedizone(rs.getString(11));
 
                 ordini.add(c);
@@ -53,8 +50,8 @@ public class OrdineDAO {
         }
     }
 
-    // Recupera una lista di ordini dal database filtrati per ID ordine
-    public List<Ordine> doRetrieveById(int id) {
+    // Dato un id recupera un ordine
+    public Ordine doRetrieveByIdOrder(int id) {
         try (Connection con = ConPool.getConnection()) {
 
             PreparedStatement ps = con.prepareStatement(
@@ -64,9 +61,9 @@ public class OrdineDAO {
 
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            List<Ordine> ordini = new ArrayList<>();
 
-            while (rs.next()) {
+
+            if(rs.next()) {
                 Ordine o = new Ordine();
                 o.setIdOrdine(rs.getInt(1));
                 o.setPrezzo(rs.getInt(2));
@@ -77,13 +74,13 @@ public class OrdineDAO {
                 o.setCognome(rs.getString(7));
                 o.setVia(rs.getString(8));
                 o.setTelefono(rs.getString(9));
-                o.setNomeMetodoPagaamneto(rs.getString(10));
+                o.setNomeMetodoPagamento(rs.getString(10));
                 o.setNomeMetodoSpedizone(rs.getString(11));
 
-                ordini.add(o);
+                return o;
             }
 
-            return ordini;
+            return null;
 
         } catch (SQLException s) {
             throw new RuntimeException(s);
@@ -114,7 +111,7 @@ public class OrdineDAO {
                 o.setCognome(rs.getString(7));
                 o.setVia(rs.getString(8));
                 o.setTelefono(rs.getString(9));
-                o.setNomeMetodoPagaamneto(rs.getString(10));
+                o.setNomeMetodoPagamento(rs.getString(10));
                 o.setNomeMetodoSpedizone(rs.getString(11));
 
                 ordini.add(o);
@@ -127,12 +124,12 @@ public class OrdineDAO {
         }
     }
 
-    // Salva un nuovo ordine nel database
-    public void doSave(Ordine ordine) {
+    // Salva un nuovo ordine nel database e restituisce l'ID generato
+    public int doSave(Ordine ordine) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO ordine (prezzo, IdUtente, cap, numerocivico, nome, cognome, via, telefono, nomemetodopagamento, nomemetodospedizione) " +
-                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            String sql = "INSERT INTO ordine (prezzo, IdUtente, cap, numerocivico, nome, cognome, via, telefono, nomemetodopagamento, nomemetodospedizione) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             ps.setInt(1, ordine.getPrezzo());
             ps.setInt(2, ordine.getIdUtente());
@@ -142,11 +139,20 @@ public class OrdineDAO {
             ps.setString(6, ordine.getCognome());
             ps.setString(7, ordine.getVia());
             ps.setString(8, ordine.getTelefono());
-            ps.setString(9, ordine.getNomeMetodoPagaamneto());
+            ps.setString(9, ordine.getNomeMetodoPagamento());
             ps.setString(10, ordine.getNomeMetodoSpedizone());
 
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
+            }
+
+            // Recupera l'ID generato
+            try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                } else {
+                    throw new RuntimeException("Failed to retrieve generated ID.");
+                }
             }
 
         } catch (SQLException e) {

@@ -1,5 +1,7 @@
 package model.beans;
 
+import java.util.Objects;
+
 public class Ordine {
     private int idOrdine;
     private int prezzo;
@@ -10,7 +12,7 @@ public class Ordine {
     private String cognome;
     private String via;
     private String telefono;
-    private String nomeMetodoPagaamneto ;
+    private String nomeMetodoPagamento ;
     private String nomeMetodoSpedizone;
 
     public int getIdOrdine() {
@@ -85,12 +87,12 @@ public class Ordine {
         this.telefono = telefono;
     }
 
-    public String getNomeMetodoPagaamneto() {
-        return nomeMetodoPagaamneto;
+    public String getNomeMetodoPagamento() {
+        return nomeMetodoPagamento;
     }
 
-    public void setNomeMetodoPagaamneto(String nomeMetodoPagaamneto) {
-        this.nomeMetodoPagaamneto = nomeMetodoPagaamneto;
+    public void setNomeMetodoPagamento(String nomeMetodoPagamento) {
+        this.nomeMetodoPagamento = nomeMetodoPagamento;
     }
 
     public String getNomeMetodoSpedizone() {
@@ -99,5 +101,18 @@ public class Ordine {
 
     public void setNomeMetodoSpedizone(String nomeMetodoSpedizone) {
         this.nomeMetodoSpedizone = nomeMetodoSpedizone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if ( this == o ) return true;
+        if ( !( o instanceof Ordine ) ) return false;
+        Ordine ordine = (Ordine) o;
+        return getIdOrdine() == ordine.getIdOrdine() && getPrezzo() == ordine.getPrezzo() && getIdUtente() == ordine.getIdUtente() && getCap() == ordine.getCap() && getNumeroCivico() == ordine.getNumeroCivico() && Objects.equals(getNome(), ordine.getNome()) && Objects.equals(getCognome(), ordine.getCognome()) && Objects.equals(getVia(), ordine.getVia()) && Objects.equals(getTelefono(), ordine.getTelefono()) && Objects.equals(getNomeMetodoPagamento(), ordine.getNomeMetodoPagamento()) && Objects.equals(getNomeMetodoSpedizone(), ordine.getNomeMetodoSpedizone());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIdOrdine(), getPrezzo(), getIdUtente(), getCap(), getNumeroCivico(), getNome(), getCognome(), getVia(), getTelefono(), getNomeMetodoPagamento(), getNomeMetodoSpedizone());
     }
 }

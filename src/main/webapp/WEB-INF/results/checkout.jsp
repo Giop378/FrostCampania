@@ -21,7 +21,7 @@
 <div class="container">
     <h2>Checkout</h2>
     <%Utente utente = (Utente) session.getAttribute("utente"); %>
-    <form class="checkout-form" action="checkout-servlet" method="post">
+    <form class="checkout-form" action="confirm-order-servlet" method="post">
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" value="<%=utente.getNome()%>"required>
 
@@ -63,7 +63,7 @@
             Prezzo Totale: €<%= String.format("%.2f", (double) prezzoTotale / 100).replace('.', ',') %>
         </div>
 
-        <button type="submit">Procedi con il checkout</button>
+        <button type="submit">ConfermaOrdine</button>
     </form>
 </div>
 <%@ include file="/WEB-INF/results/footer.jsp" %>

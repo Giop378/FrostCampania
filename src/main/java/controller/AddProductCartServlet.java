@@ -31,9 +31,10 @@ public class AddProductCartServlet extends HttpServlet {
         ProdottoDAO prodottoDAO = new ProdottoDAO();
         // Si prende l'id passato dal client e si recupera tramite DAO il relativo prodotto
         Prodotto p = prodottoDAO.doRetrieveById(Integer.parseInt(request.getParameter("idProdotto")));
+        if(p==null){
+            throw new MyServletException("Il prodotto non esiste");
+        }
         int quantità = Integer.parseInt(request.getParameter("quantità"));
-
-        // Crea un nuovo oggetto Carrello
         Carrello carrello = new Carrello();
         if (session.getAttribute("utente") == null) {
             carrello.setIdUtente(null);
@@ -49,6 +50,10 @@ public class AddProductCartServlet extends HttpServlet {
         carrello.setImmagineProdotto(p.getImmagine());
         carrello.setNomeProdotto(p.getNome());
         carrello.setIdProdotto(p.getIdProdotto());
+        //Prima di inserire la quantità controllo che effettivamente ci sono in magazzino abbastanza prodotti
+        if(quantità > p.getQuantità()){
+            throw new MyServletException("Quantità selezionata del prodotto non presente in magazzino");
+        }
         carrello.setQuantità(quantità);
 
         // Controlla se il prodotto è già presente nel carrello

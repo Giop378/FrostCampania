@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrello</title>
     <link rel="stylesheet" href="./css/cartStyles.css">
+    <script src="./script/updateQuantityCart.js"></script>
 </head>
 <body>
 <%@ include file="/WEB-INF/results/header.jsp" %>
@@ -27,8 +28,8 @@
         </div>
         <div class="product-action">
             <div class="product-quantity">
-                Quantità: <input type="number" value="<%= prodottoCarrello.getQuantità() %>">
-                <button type="submit" class="update-button">Modifica Quantità</button>
+                Quantità: <input type="number" id="<%= prodottoCarrello.getIdProdotto() %>" value="<%= prodottoCarrello.getQuantità() %>" onchange="updateQuantita(<%= prodottoCarrello.getIdProdotto() %>)">
+
                 <form action="remove-product-cart" method="post">
                     <input type="hidden" name="idProdotto" value="<%= prodottoCarrello.getIdProdotto() %>">
                     <button type="submit" class="remove-button">Rimuovi</button>

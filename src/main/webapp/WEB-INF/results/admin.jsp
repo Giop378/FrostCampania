@@ -28,7 +28,8 @@
     <button onclick="location.href='admin-choice-servlet?choice=addproduct'">Aggiungi Prodotto</button>
     <button onclick="location.href='visualizza-ordini.jsp'">Rimuovi Prodotto</button>
     <button onclick="location.href='visualizza-cliente.jsp'">Modifica Prodotto</button>
-    <button onclick="location.href='logout.jsp'">Esci</button>
+    <button onclick="location.href='show-orders'">Visualizza Ordini</button>
+    <button onclick="location.href='logout'">Esci</button>
 </div>
 </body>
 </html>

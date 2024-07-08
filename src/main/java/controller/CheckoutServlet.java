@@ -40,8 +40,14 @@ public class CheckoutServlet extends HttpServlet {
         int prezzoTotale = 0;
         for(Carrello c : carrelloSession){
             int idProdotto = c.getIdProdotto();
+            //devo controllare se la quantità inserita nel carrello dall'utente è effettivamente presente
+            int quantitàNelCarrello= c.getQuantità();
             Prodotto prodotto = prodottoDAO.doRetrieveById(idProdotto);
-            prezzoTotale = prezzoTotale + prodotto.getPrezzo();
+
+            if(quantitàNelCarrello > prodotto.getQuantità()){
+                throw new MyServletException("Quantità selezionata del prodotto non presente in magazzino");
+            }
+            prezzoTotale = prezzoTotale + prodotto.getPrezzo() * quantitàNelCarrello;
         }
         request.setAttribute("prezzoTotale", prezzoTotale);
 

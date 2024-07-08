@@ -33,6 +33,9 @@ public class CarrelloDAO {
     }
     //salva gli elementi del carrello nel database
     public void doSave(List<Carrello> carrelli) {
+        if(carrelli == null || carrelli.isEmpty()){
+            return;
+        }
         try (Connection con = ConPool.getConnection()) {
             for (Carrello carrello : carrelli) {
                 PreparedStatement ps = con.prepareStatement(
@@ -59,9 +62,8 @@ public class CarrelloDAO {
                     "DELETE FROM carrello WHERE IdUtente = ?"
             );
             ps.setInt(1, idUtente);
-            if (ps.executeUpdate() == 0) {
-                throw new RuntimeException("DELETE error.");
-            }
+            int rowsDeleted = ps.executeUpdate();
+            System.out.println("Deleted " + rowsDeleted + " rows."); // Opzionale: log per controllo
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

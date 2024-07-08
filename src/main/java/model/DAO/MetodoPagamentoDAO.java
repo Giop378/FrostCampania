@@ -39,5 +39,26 @@ public class MetodoPagamentoDAO {
             throw new RuntimeException(e);
         }
     }
+
+    //restituisce l'oggetto metodopagamento dato il nome
+    public MetodoPagamento doRetrieveByName(String nomeMetodo) {
+        MetodoPagamento metodoPagamento = null;
+
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT nome FROM metodopagamento WHERE nome = ?");
+            ps.setString(1, nomeMetodo);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                metodoPagamento = new MetodoPagamento();
+                metodoPagamento.setNome(rs.getString("nome"));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore durante il recupero del metodo di pagamento per nome: " + nomeMetodo, e);
+        }
+
+        return metodoPagamento;
+    }
 }
 

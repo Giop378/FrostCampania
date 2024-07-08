@@ -1,0 +1,31 @@
+h1{
+    text-align: center;
+}
+.order-card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin: 16px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.order-card h2 {
+    margin-top: 0;
+}
+.order-details {
+    margin-top: 16px;
+    display: none;
+}
+.order-card button {
+    background-color: #019FDC;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.order-card button:hover {
+    background-color: #017bb5;
+}

@@ -41,4 +41,27 @@ public class MetodoSpedizioneDAO {
             throw new RuntimeException(e);
         }
     }
+
+    // Recupera un metodo di spedizione dato il nome
+    public MetodoSpedizione doRetrieveByName(String nomeMetodo) {
+        MetodoSpedizione metodoSpedizione = null;
+
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT nome, descrizione, costo FROM metodospedizione WHERE nome = ?");
+            ps.setString(1, nomeMetodo);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                metodoSpedizione = new MetodoSpedizione();
+                metodoSpedizione.setNome(rs.getString("nome"));
+                metodoSpedizione.setDescrizione(rs.getString("descrizione"));
+                metodoSpedizione.setCosto(rs.getInt("costo"));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore durante il recupero del metodo di spedizione per nome: " + nomeMetodo, e);
+        }
+
+        return metodoSpedizione;
+    }
 }

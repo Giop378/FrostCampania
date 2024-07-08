@@ -36,11 +36,11 @@
         <div><strong>Data di Nascita:</strong> <%=utente.getDataDiNascita()%></div>
     </div>
     <div class="profile-buttons">
-        <form action="UserServlet" method="post">
+        <form action="logout" method="post">
             <input type="hidden" name="action" value="logout">
             <button type="submit" class="profile-button">Logout</button>
         </form>
-        <form action="OrderHistoryServlet" method="get">
+        <form action="show-orders" method="get">
             <button type="submit" class="profile-button">Storico Ordini</button>
         </form>
     </div>

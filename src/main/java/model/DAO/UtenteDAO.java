@@ -2,10 +2,7 @@ package model.DAO;
 
 import model.beans.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class UtenteDAO {
@@ -50,10 +47,11 @@ public class UtenteDAO {
         return utente;
     }
 
-    public void doSave(Utente utente) {
+    public int doSave(Utente utente) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO utente (nome, cognome, email, passwordhash, datadinascita, adminCheck) VALUES(?,?,?,?,?,?)"
+                    "INSERT INTO utente (nome, cognome, email, passwordhash, datadinascita, adminCheck) VALUES(?,?,?,?,?,?)",
+                    Statement.RETURN_GENERATED_KEYS
             );
             ps.setString(1, utente.getNome());
             ps.setString(2, utente.getCognome());
@@ -61,8 +59,17 @@ public class UtenteDAO {
             ps.setString(4, utente.getPasswordhash());
             ps.setDate(5, java.sql.Date.valueOf(utente.getDataDiNascita()));
             ps.setBoolean(6, utente.isAdminCheck());
+
             if (ps.executeUpdate() != 1) {
                 throw new RuntimeException("INSERT error.");
+            }
+
+            try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                } else {
+                    throw new RuntimeException("Failed to retrieve generated ID.");
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
