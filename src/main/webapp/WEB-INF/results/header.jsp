@@ -7,9 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="model.beans.Categoria" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>header</title>
+  <title>header</title>
   <link rel="stylesheet" href="./css/header.css">
 </head>
 <body>
@@ -19,8 +20,9 @@
   </a>
   <div class="search-container">
     <input type="text" placeholder="Cerca i nostri prodotti..." class="search-bar" aria-label="Search">
-    <button class="search-button" aria-label="Search Button">Cerca</button>
+    <div class="search-results"></div>
   </div>
+
 
   <div class="icon-container">
     <a href="user-servlet" class="icon-access" aria-label="Accedi">
@@ -34,9 +36,10 @@
 <div class="nav-items">
   <% List<Categoria> categorie = (List<Categoria>) application.getAttribute("categorie");
     for (Categoria categoria : categorie) { %>
-  <a href="categoria?categoria=<%=categoria.getNome()%>" aria-label="<%=categoria.getNome()%>" value="<%=categoria.getNome()%>"><%=categoria.getNome()%></a>
+  <a href="categoria?categoria=<%=categoria.getNome()%>" aria-label="<%=categoria.getNome()%>"
+     value="<%=categoria.getNome()%>"><%=categoria.getNome()%></a>
   <% } %>
 </div>
-
+<script src="./script/header.js"></script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+/* Stili per l'header */
 .header {
     display: flex;
     justify-content: space-between;
@@ -5,14 +6,14 @@
     padding: 10px 20px;
     background-color: #019FDC;
     color: #fff;
-    position: relative; /* Per permettere il posizionamento assoluto */
+    position: relative; /* Assicura che i figli posizionati assolutamente siano relativi a questo contenitore */
 }
 
 .logo-img {
     padding: 20px;
-    text-decoration: none; /* Rimuove il sottolineato */
-    transition: filter 0.3s ease; /* Aggiungi una transizione per un cambiamento di filtro fluido */
-    width: 100px; /* Imposta una dimensione appropriata per le icone */
+    text-decoration: none;
+    transition: filter 0.3s ease;
+    width: 100px;
     height: 100px;
 }
 
@@ -22,12 +23,7 @@
 
 .search-container {
     display: flex;
-    background-color: #ffffff;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 300px; /* Imposta una larghezza specifica per la barra di ricerca */
-    margin-right: 20px; /* Spazio tra la barra di ricerca e i bottoni */
+    position: relative; /* Importante per il posizionamento corretto della search-results */
 }
 
 .search-bar {
@@ -36,38 +32,30 @@
     border: none;
     outline: none;
     flex: 1;
+    border-radius: 5px;
 }
 
-.search-button {
-    padding: 10px 20px;
-    background-color: darkblue;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.search-button:hover {
-    background-color: darkred;
+.icon-container {
+    display: flex;
+    align-items: center;
 }
 
 .icon-access,
 .icon-cart {
     padding: 20px;
-    text-decoration: none; /* Rimuove il sottolineato */
-    transition: filter 0.3s ease; /* Aggiungi una transizione per un cambiamento di filtro fluido */
+    text-decoration: none;
+    transition: filter 0.3s ease;
 }
 
 .icon-img {
-    width: 24px; /* Imposta una dimensione appropriata per le icone */
+    width: 24px;
     height: 24px;
-    transition: filter 0.3s ease; /* Aggiungi una transizione per un cambiamento di filtro fluido */
+    transition: filter 0.3s ease;
 }
 
 .icon-img:hover {
     filter: invert(100%);
 }
-
 
 .nav-items {
     display: flex;
@@ -90,3 +78,53 @@
 .nav-items a:hover {
     color: red;
 }
+
+/* Stili per i risultati della ricerca */
+.search-results {
+    position: absolute;
+    top: calc(100% + 10px); /* Posiziona la finestra dei risultati sotto la barra di ricerca */
+    left: 0;
+    width: 100%; /* Larghezza al 100% della barra di ricerca */
+    max-width: 300px; /* Larghezza massima come quella della barra di ricerca */
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.result-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.result-item img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.result-item .product-info {
+    flex: 1;
+}
+
+.search-results .no-results-message {
+    color: black; /* Imposta il colore del testo a nero */
+}
+
+.result-item .product-link {
+    text-decoration: none; /* Rimuove la sottolineatura dai link */
+}
+
+.result-item .product-info p {
+    text-decoration: none; /* Rimuove la sottolineatura dai paragrafi */
+}
+
+
+
+
+
+
+
+

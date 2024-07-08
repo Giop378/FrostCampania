@@ -168,4 +168,33 @@ public class ProdottoDAO {
             throw new RuntimeException(e);
         }
     }
+    public List<Prodotto> doRetrieveByName(String nomeProdotto) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("select idProdotto, nome, prezzo, descrizione, immagine, vetrina, sconto, quantità, nomecategoria from prodotto where nome LIKE ?");
+            ps.setString(1, "%" + nomeProdotto + "%");
+            ResultSet rs = ps.executeQuery();
+            List<Prodotto> prodotti = new ArrayList<>();
+
+            while (rs.next()) {
+
+                Prodotto p = new Prodotto();
+                p.setIdProdotto(rs.getInt(1));
+                p.setNome(rs.getString(2));
+                p.setPrezzo(rs.getInt(3));
+                p.setDescrizione(rs.getString(4));
+                p.setImmagine(rs.getString(5));
+                p.setVetrina(rs.getBoolean(6));
+                p.setSconto(rs.getInt(7));
+                p.setQuantità(rs.getInt(8));
+                p.setNomeCategoria(rs.getString(9));
+                prodotti.add(p);
+            }
+
+            return prodotti;
+
+        } catch (SQLException s) {
+
+            throw new RuntimeException(s);
+        }
+    }
 }
