@@ -28,7 +28,7 @@
             </div>
             <div class="product-action">
                 <div class="product-quantity">
-                    Quantità: <input type="number" id="<%= prodottoCarrello.getIdProdotto() %>" value="<%= prodottoCarrello.getQuantità() %>" onchange="updateQuantita(<%= prodottoCarrello.getIdProdotto() %>)">
+                    Quantità: <input type="number" id="<%= prodottoCarrello.getIdProdotto() %>" name="quantita" value="<%= prodottoCarrello.getQuantità() %>" min="1" step="1" onchange="updateQuantita(<%= prodottoCarrello.getIdProdotto() %>)">
 
                     <form action="remove-product-cart" method="post">
                         <input type="hidden" name="idProdotto" value="<%= prodottoCarrello.getIdProdotto() %>">

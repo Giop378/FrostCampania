@@ -23,22 +23,22 @@
     <%Utente utente = (Utente) session.getAttribute("utente"); %>
     <form class="checkout-form" action="confirm-order-servlet" method="post">
         <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" value="<%=utente.getNome()%>"required>
+        <input type="text" id="nome" name="nome" value="<%=utente.getNome()%>"required  pattern="[a-zA-Z ]+" title="Inserisci solo lettere e spazi">
 
         <label for="cognome">Cognome:</label>
-        <input type="text" id="cognome" name="cognome" value="<%=utente.getCognome()%>" required>
+        <input type="text" id="cognome" name="cognome" value="<%=utente.getCognome()%>" required   pattern="[a-zA-Z ]+" title="Inserisci solo lettere e spazi">
 
         <label for="via">Via:</label>
         <input type="text" id="via" name="via" required>
 
         <label for="numerocivico">Numero Civico:</label>
-        <input type="text" id="numerocivico" name="numerocivico" required>
+        <input type="text" id="numerocivico" name="numerocivico" required  pattern="[0-9]{1,4}" title="Inserisci massimo 4 numeri" >
 
         <label for="cap">CAP:</label>
-        <input type="text" id="cap" name="cap" required>
+        <input type="text" id="cap" name="cap" required pattern="[0-9]{5}" title="Inserisci esattamente  5 numeri">
 
         <label for="telefono">Telefono:</label>
-        <input type="text" id="telefono" name="telefono">
+        <input type="text" id="telefono" name="telefono" pattern="[0-9]{9,15}" title="Inserisci da 9 a 15 numeri">
 
         <% List<MetodoPagamento> metodiPagamento = (List<MetodoPagamento>) request.getAttribute("metodiPagamento"); %>
         <label for="metodoPagamento">Metodo di Pagamento:</label>

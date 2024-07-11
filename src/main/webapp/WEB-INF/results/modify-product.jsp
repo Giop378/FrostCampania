@@ -50,7 +50,7 @@
   <input type="number" id="sconto" name="sconto" value="0"><br>
 
   <label for="quantita">Quantità:</label>
-  <input type="number" id="quantita" name="quantita" required><br>
+  <input type="number" id="quantita" name="quantita" required  min="1" step="1"><br>
 
   <label for="categoria">Categoria:</label>
   <select id="categoria" name="nomecategoria" required>

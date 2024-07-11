@@ -41,7 +41,7 @@
                 <div class="add-to-cart">
                     <form action="add-product-cart" method="post">
                         <input type="hidden" name="idProdotto" value="<%= prodotto.getIdProdotto() %>">
-                        <input type="number" name="quantità" value="1" min="1" class="quantity-input">
+                        <input type="number" name="quantità" value="1" min="1" step="1" class="quantity-input">
                         <button type="submit" class="add-to-cart-button">Aggiungi al carrello</button>
                     </form>
                 </div>
