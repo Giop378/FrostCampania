@@ -1,6 +1,12 @@
 h1 {
     text-align: center;
 }
+body{
+    min-height: 100%;
+}
+#spacer{
+    height: 150px;
+}
 .item-card {
     display: flex;
     align-items: center;

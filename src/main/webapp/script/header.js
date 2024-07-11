@@ -41,8 +41,12 @@ document.addEventListener('DOMContentLoaded', function() {
         var resultsContainer = document.createElement('div');
         resultsContainer.classList.add('search-results');
 
-        if (results.length > 0) {
-            results.forEach(function(prodotto) {
+        var numResults = Math.min(results.length, 4); // Limita a massimo 4 risultati
+
+        if (numResults > 0) {
+            for (var i = 0; i < numResults; i++) {
+                var prodotto = results[i];
+
                 var resultItem = document.createElement('div');
                 resultItem.classList.add('result-item');
 
@@ -69,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 resultItem.appendChild(link);
 
                 resultsContainer.appendChild(resultItem);
-            });
+            }
         } else {
             displayNoResults();
         }

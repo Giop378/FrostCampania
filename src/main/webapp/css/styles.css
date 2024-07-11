@@ -86,3 +86,54 @@ h2{
 .product a {
     text-decoration: none;
 }
+
+/* Responsive CSS */
+@media (max-width: 1200px) {
+    .product {
+        flex: 1 1 calc(33.333% - 40px);
+    }
+}
+
+@media (max-width: 992px) {
+    .product {
+        flex: 1 1 calc(50% - 40px);
+    }
+}
+
+@media (max-width: 768px) {
+    .product {
+        flex: 1 1 100%;
+    }
+
+    .category-img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .product-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .category-img {
+        width: 100%;
+        height: auto;
+    }
+
+    .add-to-cart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .quantity-input {
+        margin-bottom: 10px;
+    }
+}

@@ -68,3 +68,21 @@ body {
     color: red;
     margin-top: 10px;
 }
+/* Responsive CSS */
+@media (max-width: 1024px) {
+    .login-container {
+    }
+
+    .login-box {
+        width: 100%; /* Occupa tutta la larghezza disponibile */
+        max-width: 400px; /* Larghezza massima */
+    }
+
+    .input-group {
+        margin-bottom: 10px; /* Ridotto il margine tra i gruppi di input */
+    }
+
+    .login-button {
+        width: 100%; /* Occupa tutta la larghezza disponibile */
+    }
+}

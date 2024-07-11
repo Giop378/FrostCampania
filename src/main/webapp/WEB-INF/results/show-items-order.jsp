@@ -19,7 +19,7 @@
 </head>
 <body>
 <%@include file="header.jsp"%>
-
+<div class="content-wrapper">
 <div class="main">
     <h1>Dettagli Ordine</h1>
     <% List<ItemOrdine> itemOrdineList = (List<ItemOrdine>) request.getAttribute("itemOrdineList");
@@ -36,6 +36,8 @@
         </div>
     </div>
     <% } %>
+</div>
+    <div id="spacer"></div>
 </div>
 
 <%@include file="footer.jsp"%>

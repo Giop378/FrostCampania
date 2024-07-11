@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>File Upload Result</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 File caricato con successo: <a href="${uploaded}">${uploaded}</a>.<br>

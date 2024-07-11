@@ -121,6 +121,76 @@
     text-decoration: none; /* Rimuove la sottolineatura dai paragrafi */
 }
 
+@media (max-width: 600px) {
+    .header {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .logo {
+        order: 1;
+    }
+
+    .search-container {
+        order: 2;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        margin: 0 10px;
+    }
+
+    .icon-container {
+        order: 3;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .logo-img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .search-bar {
+        width: 100%;
+    }
+
+    .icon-access, .icon-cart {
+        padding: 10px;
+    }
+
+    .icon-img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .nav-items {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        padding: 10px 0;
+        margin: 10px 0;
+        width: 100%;
+    }
+
+    .nav-items a {
+        font-size: 16px;
+    }
+
+    .search-results {
+        max-width: 100%;
+    }
+
+    .result-item img {
+        width: 40px;
+    }
+
+    .result-item {
+        padding: 8px;
+    }
+}
+
+
 
 
 
