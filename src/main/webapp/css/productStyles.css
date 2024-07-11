@@ -1,6 +1,17 @@
+html, body {
+    height: 100%; /* Assicura che l'elemento html e body coprano l'intera altezza della finestra */
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background-color: #fff;
+    color: #333;
+    display: flex; /* Rende il corpo un contenitore flessibile */
+    flex-direction: column; /* Dispone i figli in colonna */
+}
+
 .main {
     padding: 20px;
     background-color: #ffffff;
+    flex-grow: 1; /* Permette al contenitore principale di espandersi per riempire lo spazio disponibile */
 }
 
 .product-detail {
@@ -93,6 +104,7 @@ p {
         margin-bottom: 10px;
     }
 }
+
 /* Responsive CSS */
 @media (max-width: 1300px) {
     .product-detail {
@@ -124,6 +136,5 @@ p {
         margin-bottom: 10px;
     }
 }
-
 
 

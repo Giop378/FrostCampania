@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="header-admin">
-    <a href="index.html" class="logo" aria-label="Home">
+    <a href="user-servlet" class="logo" aria-label="Home">
         <img src="./images/logo.png" alt="FrostCampania Logo" class="logo-img">
     </a>
 </div>

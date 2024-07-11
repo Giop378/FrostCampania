@@ -96,7 +96,11 @@ public class ConfirmOrderServlet extends HttpServlet {
         // Svuota il carrello dopo l'invio dell'ordine
         session.removeAttribute("carrello");
 
-        // Set attributes for the JSP
+        //Rimuove il carrello dal database
+        CarrelloDAO carrelloDAO = new CarrelloDAO();
+        carrelloDAO.doDelete(utente.getIdUtente());
+
+
         request.setAttribute("ordine", ordine);
         request.setAttribute("itemsOrdine", itemsOrdine);
 

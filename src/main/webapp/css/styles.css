@@ -5,7 +5,6 @@ body {
     color: #333;
 }
 
-
 .intro,
 .featured-products {
     margin: 20px auto;
@@ -33,7 +32,7 @@ body {
     transition: box-shadow 0.3s ease;
 }
 
-h2{
+h2 {
     text-align: center;
 }
 
@@ -85,6 +84,39 @@ h2{
 
 .product a {
     text-decoration: none;
+}
+
+/* Pagination styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 10px 20px;
+    margin: 0 5px;
+    background-color: #019FDC;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.pagination button:hover {
+    background-color: darkblue;
+}
+
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#page-info {
+    margin: 0 10px;
+    font-size: 1.2em;
 }
 
 /* Responsive CSS */

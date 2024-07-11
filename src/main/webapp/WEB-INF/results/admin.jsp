@@ -26,8 +26,8 @@
 <h1>Area Amministratore</h1>
 <div class="button-container">
     <button onclick="location.href='admin-choice-servlet?choice=addproduct'">Aggiungi Prodotto</button>
-    <button onclick="location.href='visualizza-ordini.jsp'">Rimuovi Prodotto</button>
-    <button onclick="location.href='visualizza-cliente.jsp'">Modifica Prodotto</button>
+    <button onclick="location.href='admin-choice-servlet?choice=modifyproduct'">Modifica Prodotto</button>
+    <button onclick="location.href='admin-choice-servlet?choice=deleteproduct'">Rimuovi Prodotto</button>
     <button onclick="location.href='show-orders'">Visualizza Ordini</button>
     <button onclick="location.href='logout'">Esci</button>
 </div>

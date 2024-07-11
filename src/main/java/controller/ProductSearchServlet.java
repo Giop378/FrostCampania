@@ -1,6 +1,5 @@
 package controller;
 
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -31,8 +30,14 @@ public class ProductSearchServlet extends HttpServlet {
             JSONObject prodottoJson = new JSONObject();
             prodottoJson.put("idProdotto", prodotto.getIdProdotto());
             prodottoJson.put("nome", prodotto.getNome());
+            prodottoJson.put("descrizione", prodotto.getDescrizione());
             prodottoJson.put("prezzo", prodotto.getPrezzo());
+            prodottoJson.put("vetrina", prodotto.isVetrina());
             prodottoJson.put("immagine", prodotto.getImmagine());
+            prodottoJson.put("sconto", prodotto.getSconto());
+            prodottoJson.put("quantita", prodotto.getQuantità());
+            prodottoJson.put("nomecategoria", prodotto.getNomeCategoria());
+
             jsonRisultati.add(prodottoJson);
         }
 

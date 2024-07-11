@@ -77,7 +77,7 @@ public class ProdottoDAO {
     //restituisce gli elementi della vetrina
     public List<Prodotto> doRetrieveVetrina(){
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("select idProdotto, nome, prezzo, descrizione, immagine, vetrina, sconto, quantità, nomecategoria from prodotto where vetrina=true");
+            PreparedStatement ps = con.prepareStatement("SELECT idProdotto, nome, prezzo, descrizione, immagine, vetrina, sconto, quantità, nomecategoria FROM prodotto WHERE vetrina = true ORDER BY RAND() LIMIT 8");
             ResultSet rs = ps.executeQuery();
             List<Prodotto> prodotti = new ArrayList<>();
 
@@ -195,6 +195,20 @@ public class ProdottoDAO {
         } catch (SQLException s) {
 
             throw new RuntimeException(s);
+        }
+    }
+    // Elimina un prodotto dal database dato l'id del prodotto
+    public void doDelete(int idProdotto) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM prodotto WHERE idProdotto = ?");
+            ps.setInt(1, idProdotto);
+
+            if (ps.executeUpdate() != 1) {
+                throw new RuntimeException("DELETE error.");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

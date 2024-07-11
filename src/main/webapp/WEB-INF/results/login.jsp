@@ -34,7 +34,7 @@
             <button type="submit" class="login-button">Login</button>
         </form>
         <p id="error-message" class="error-message"></p>
-        <p class="register-link">Non hai un account? <a href="utente-servlet?action=register">Registrati qui</a></p>
+        <p class="register-link">Non hai un account? <a href="user-servlet?action=register">Registrati qui</a></p>
     </div>
 </div>
 <%@ include file="footer.jsp" %>

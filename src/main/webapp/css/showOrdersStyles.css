@@ -1,11 +1,17 @@
-body {
+html, body {
+    height: 100%;
     margin: 0;
     font-family: 'Georgia', serif;
     background-color: #fff;
     color: #333;
 }
 
-.container {
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
     margin: 20px auto;
     padding: 20px;
     background-color: #f9f9f9;
@@ -13,6 +19,7 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     max-width: 100%;
     width: 90%;
+    flex-grow: 1;
 }
 
 h1, h2 {
@@ -82,7 +89,7 @@ th {
 }
 
 @media (max-width: 1024px) {
-    .container {
+    .main {
         padding: 10px;
     }
     .product-img {

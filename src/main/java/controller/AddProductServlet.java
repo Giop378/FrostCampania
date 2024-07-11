@@ -39,12 +39,10 @@ public class AddProductServlet extends HttpServlet {
             int sconto = Integer.parseInt(request.getParameter("sconto"));
             int quantita = Integer.parseInt(request.getParameter("quantita"));
             String nomeCategoria = request.getParameter("nomecategoria");
-            if(categoriaDAO.doRetrieveByNomeCategoria(nomeCategoria)==null){
+            if(categoriaDAO.doRetrieveByNomeCategoria(nomeCategoria)==null) {
                 throw new ServletException("Categoria non esistente");
-                //request.setAttribute("errorMessage", "Categoria non esistente") ;
-                //RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/general-error.jsp");
-                //dispatcher.forward(request, response);
             }
+            nuovoProdotto.setVetrina(inVetrina);
             nuovoProdotto.setNomeCategoria(nomeCategoria);
             nuovoProdotto.setPrezzo(prezzo);
             nuovoProdotto.setSconto(sconto);
@@ -100,10 +98,11 @@ public class AddProductServlet extends HttpServlet {
         nuovoProdotto.setImmagine(destinazione);
         ProdottoDAO prodottoDAO = new ProdottoDAO();
         prodottoDAO.doSave(nuovoProdotto);
-        request.setAttribute("uploaded", destinazione);
 
         // Inoltra la richiesta al risultato della pagina JSP
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/results/uploadResult.jsp");
+        String successMessage = "Prodotto aggiunto con successo";
+        request.setAttribute("successMessage", successMessage);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/results/confirm-operation.jsp");
         requestDispatcher.forward(request, response);
     }
 

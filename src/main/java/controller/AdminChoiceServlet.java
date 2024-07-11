@@ -23,6 +23,14 @@ public class AdminChoiceServlet extends HttpServlet{
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/add-product.jsp");
             dispatcher.forward(request, response);
         }
+        if("modifyproduct".equals(choice)){
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/modify-product.jsp");
+            dispatcher.forward(request, response);
+        }
+        if("deleteproduct".equals(choice)){
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/delete-product.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     @Override
