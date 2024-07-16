@@ -30,7 +30,6 @@
         <h2>Profilo Utente</h2>
     </div>
     <div class="profile-info">
-        <c:set var="utente" value="${sessionScope.utente}" />
         <div><strong>ID Utente:</strong> ${utente.idUtente}</div>
         <div><strong>Nome:</strong> ${utente.nome}</div>
         <div><strong>Cognome:</strong> ${utente.cognome}</div>

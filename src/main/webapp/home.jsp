@@ -22,7 +22,7 @@
     <div class="featured-products">
         <h2>VETRINA</h2>
         <div class="product-list">
-            <c:forEach var="prodotto" items="${requestScope.prodottiVetrina}">
+            <c:forEach var="prodotto" items="${prodottiVetrina}">
                 <div class="product">
                     <a href="prodotto?id=${prodotto.idProdotto}">
                         <img src="${prodotto.immagine}" alt="${prodotto.nome}" class="product-img">

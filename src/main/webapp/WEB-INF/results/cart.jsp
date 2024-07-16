@@ -15,7 +15,7 @@
 <div class="content-wrapper">
     <div class="container">
         <% List<Carrello> carrello = (List<Carrello>) session.getAttribute("carrello");
-            double prezzoTotale = 0.0;
+            int prezzoTotale = 0;
             for(Carrello prodottoCarrello : carrello){
                 prezzoTotale += prodottoCarrello.getPrezzoProdotto() * prodottoCarrello.getQuantità();
         %>

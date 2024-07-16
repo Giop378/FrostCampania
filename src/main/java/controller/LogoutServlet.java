@@ -23,18 +23,19 @@ public class LogoutServlet extends HttpServlet {
         HttpSession session = request.getSession();
         List<Carrello> carrelloSession = (List<Carrello>) session.getAttribute("carrello");
         Utente utente = (Utente) session.getAttribute("utente");
-        if(utente==null){
+        if ( utente == null ) {
             throw new MyServletException("Utente non registrato: non puoi fare il logout");
         }
 
         //Elimino tutti gli elementi nel carrello associati a quell'utente per poi salvare i nuovi elementi carrello che sono salvati in sessione
-        CarrelloDAO carrelloDAO = new CarrelloDAO();
-        List<Carrello> carrelloDB = carrelloDAO.doRetrieveByIdUtente(utente.getIdUtente());
-        if(!carrelloDB.isEmpty()) {
-            carrelloDAO.doDelete(utente.getIdUtente());
+        if ( !utente.isAdminCheck() ){
+            CarrelloDAO carrelloDAO = new CarrelloDAO();
+            List<Carrello> carrelloDB = carrelloDAO.doRetrieveByIdUtente(utente.getIdUtente());
+            if ( !carrelloDB.isEmpty() ) {
+                carrelloDAO.doDelete(utente.getIdUtente());
+            }
+            carrelloDAO.doSave(carrelloSession);
         }
-        carrelloDAO.doSave(carrelloSession);
-
         session.invalidate();
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.html");

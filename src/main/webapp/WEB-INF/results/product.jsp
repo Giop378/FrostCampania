@@ -24,7 +24,7 @@
 
 <div class="main">
     <div class="product-detail">
-        <c:set var="prodotto" value="${requestScope.prodotto}" />
+        <c:set var="prodotto" value="${prodotto}" />
         <img src="${prodotto.immagine}" alt="${prodotto.nome}" class="product-img">
         <div class="product-info">
             <h1>${prodotto.nome}</h1>

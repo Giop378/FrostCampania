@@ -35,7 +35,7 @@
   </div>
 </div>
 <div class="nav-items">
-  <c:forEach var="categoria" items="${applicationScope.categorie}">
+  <c:forEach var="categoria" items="${categorie}">
     <a href="categoria?categoria=${categoria.nome}" aria-label="${categoria.nome}">
         ${categoria.nome}
     </a>

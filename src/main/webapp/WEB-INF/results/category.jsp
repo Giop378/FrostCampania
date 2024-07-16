@@ -16,7 +16,6 @@
 
 <div class="main">
     <div class="intro">
-        <c:set var="categoriaScelta" value="${requestScope.categoriaScelta}" />
         <h1>${categoriaScelta.nome}</h1>
     </div>
 
