@@ -9,6 +9,8 @@
 <%@ page import="model.beans.Prodotto" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.beans.Categoria" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -22,19 +24,19 @@
 
 <div class="main">
     <div class="product-detail">
-        <% Prodotto prodotto = (Prodotto) request.getAttribute("prodotto"); %>
-        <img src="<%= prodotto.getImmagine() %>" alt="<%= prodotto.getNome() %>" class="product-img">
+        <c:set var="prodotto" value="${requestScope.prodotto}" />
+        <img src="${prodotto.immagine}" alt="${prodotto.nome}" class="product-img">
         <div class="product-info">
-            <h1><%= prodotto.getNome() %></h1>
-            <p>ID prodotto: <%= prodotto.getIdProdotto()%></p>
-            <p id="initial-price">Prezzo iniziale: <%= String.format("%.2f", prodotto.getPrezzo() / (100.0 - prodotto.getSconto())).replace('.', ',') %>€</p>
-            <p>Sconto: <%= prodotto.getSconto()%>%</p>
-            <p>Prezzo: <%= String.format("%.2f", prodotto.getPrezzo() / 100.0).replace('.', ',') %>€</p>
-            <p>Descrizione: <%= prodotto.getDescrizione() %></p>
+            <h1>${prodotto.nome}</h1>
+            <p>ID prodotto: ${prodotto.idProdotto}</p>
+            <p id="initial-price">Prezzo iniziale: <fmt:formatNumber value="${prodotto.prezzo / (100.0 - prodotto.sconto)}" type="currency" currencySymbol="€" maxFractionDigits="2"/></p>
+            <p>Sconto: ${prodotto.sconto}%</p>
+            <p>Prezzo: <fmt:formatNumber value="${prodotto.prezzo / 100.0}" type="currency" currencySymbol="€" maxFractionDigits="2"/></p>
+            <p>Descrizione: ${prodotto.descrizione}</p>
             <div class="add-to-cart">
                 <form action="add-product-cart" method="post">
-                    <input type="hidden" name="idProdotto" value="<%= prodotto.getIdProdotto() %>">
-                    <input type="number" name="quantità" value="1" min="1"  step="1" class="quantity-input">
+                    <input type="hidden" name="idProdotto" value="${prodotto.idProdotto}">
+                    <input type="number" name="quantità" value="1" min="1" step="1" class="quantity-input">
                     <button type="submit" class="add-to-cart-button">Aggiungi al carrello</button>
                 </form>
             </div>
@@ -45,6 +47,7 @@
 <%@ include file="/WEB-INF/results/footer.jsp" %>
 </body>
 </html>
+
 
 
 

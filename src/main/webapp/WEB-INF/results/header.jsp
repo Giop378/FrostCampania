@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="model.beans.Categoria" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,6 @@
     <div class="search-results"></div>
   </div>
 
-
   <div class="icon-container">
     <a href="user-servlet" class="icon-access" aria-label="Accedi">
       <img src="./images/login.png" alt="Accedi" class="icon-img">
@@ -35,11 +35,11 @@
   </div>
 </div>
 <div class="nav-items">
-  <% List<Categoria> categorie = (List<Categoria>) application.getAttribute("categorie");
-    for (Categoria categoria : categorie) { %>
-  <a href="categoria?categoria=<%=categoria.getNome()%>" aria-label="<%=categoria.getNome()%>"
-     value="<%=categoria.getNome()%>"><%=categoria.getNome()%></a>
-  <% } %>
+  <c:forEach var="categoria" items="${applicationScope.categorie}">
+    <a href="categoria?categoria=${categoria.nome}" aria-label="${categoria.nome}">
+        ${categoria.nome}
+    </a>
+  </c:forEach>
 </div>
 <script src="./script/header.js"></script>
 </body>

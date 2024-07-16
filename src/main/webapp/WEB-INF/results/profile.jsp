@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page import="jakarta.servlet.http.HttpSession" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="model.beans.Utente" %>
@@ -19,21 +21,21 @@
     <title>Profilo Utente</title>
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/profileStyles.css">
-
 </head>
 <body>
 <%@ include file="/WEB-INF/results/header.jsp" %>
+
 <div class="profile-container">
     <div class="profile-header">
         <h2>Profilo Utente</h2>
     </div>
     <div class="profile-info">
-        <% Utente utente=(Utente) session.getAttribute("utente");%>
-        <div><strong>ID Utente:</strong> <%=utente.getIdUtente()%></div>
-        <div><strong>Nome:</strong> <%=utente.getNome()%></div>
-        <div><strong>Cognome:</strong> <%=utente.getCognome()%></div>
-        <div><strong>Email:</strong> <%=utente.getEmail()%></div>
-        <div><strong>Data di Nascita:</strong> <%=utente.getDataDiNascita()%></div>
+        <c:set var="utente" value="${sessionScope.utente}" />
+        <div><strong>ID Utente:</strong> ${utente.idUtente}</div>
+        <div><strong>Nome:</strong> ${utente.nome}</div>
+        <div><strong>Cognome:</strong> ${utente.cognome}</div>
+        <div><strong>Email:</strong> ${utente.email}</div>
+        <div><strong>Data di Nascita:</strong> ${utente.dataDiNascita}</div>
     </div>
     <div class="profile-buttons">
         <form action="logout" method="post">
@@ -45,6 +47,7 @@
         </form>
     </div>
 </div>
+
 <%@ include file="/WEB-INF/results/footer.jsp" %>
 </body>
 </html>

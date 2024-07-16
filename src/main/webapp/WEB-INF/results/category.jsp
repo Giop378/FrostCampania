@@ -2,6 +2,8 @@
 <%@ page import="model.beans.Prodotto" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.beans.Categoria" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -14,39 +16,36 @@
 
 <div class="main">
     <div class="intro">
-        <% Categoria categoriaScelta = (Categoria) request.getAttribute("categoriaScelta"); %>
-        <h1><%= categoriaScelta.getNome() %></h1>
+        <c:set var="categoriaScelta" value="${requestScope.categoriaScelta}" />
+        <h1>${categoriaScelta.nome}</h1>
     </div>
 
     <div class="category-image">
-        <img src="<%= categoriaScelta.getImmagine() %>" alt="<%= categoriaScelta.getNome() %>" class="category-img">
-        <p class="category-description">
-            <%= categoriaScelta.getDescrizione() %>
-        </p>
+        <img src="${categoriaScelta.immagine}" alt="${categoriaScelta.nome}" class="category-img">
+        <p class="category-description">${categoriaScelta.descrizione}</p>
     </div>
 
     <div class="featured-products">
         <h2>PRODOTTI</h2>
         <div class="product-list" id="lista-prodotti">
-            <% List<Prodotto> prodottiPerCategoria = (List<Prodotto>) request.getAttribute("prodottiPerCategoria");
-                for (Prodotto prodotto : prodottiPerCategoria) { %>
-            <div class="product">
-                <a href="prodotto?id=<%= prodotto.getIdProdotto() %>">
-                    <img src="<%= prodotto.getImmagine() %>" alt="<%= prodotto.getNome() %>" class="product-img">
-                    <h3><%= prodotto.getNome() %></h3>
-                </a>
-                <p id="prezzo-iniziale">Prezzo iniziale: <%= String.format("%.2f", prodotto.getPrezzo() / (100.0 - prodotto.getSconto())).replace('.', ',') %>€</p>
-                <p>Sconto: <%= prodotto.getSconto() %>%</p>
-                <p>Prezzo: <%= String.format("%.2f", prodotto.getPrezzo() / 100.0).replace('.', ',') %>€</p>
-                <div class="add-to-cart">
-                    <form action="add-product-cart" method="post">
-                        <input type="hidden" name="idProdotto" value="<%= prodotto.getIdProdotto() %>">
-                        <input type="number" name="quantità" value="1" min="1" step="1" class="quantity-input">
-                        <button type="submit" class="add-to-cart-button">Aggiungi al carrello</button>
-                    </form>
+            <c:forEach var="prodotto" items="${requestScope.prodottiPerCategoria}">
+                <div class="product">
+                    <a href="prodotto?id=${prodotto.idProdotto}">
+                        <img src="${prodotto.immagine}" alt="${prodotto.nome}" class="product-img">
+                        <h3>${prodotto.nome}</h3>
+                    </a>
+                    <p id="prezzo-iniziale">Prezzo iniziale: <fmt:formatNumber value="${prodotto.prezzo / (100.0 - prodotto.sconto)}" type="currency" currencySymbol="€" maxFractionDigits="2"/></p>
+                    <p>Sconto: ${prodotto.sconto}%</p>
+                    <p>Prezzo: <fmt:formatNumber value="${prodotto.prezzo / 100.0}" type="currency" currencySymbol="€" maxFractionDigits="2"/></p>
+                    <div class="add-to-cart">
+                        <form action="add-product-cart" method="post">
+                            <input type="hidden" name="idProdotto" value="${prodotto.idProdotto}">
+                            <input type="number" name="quantità" value="1" min="1" step="1" class="quantity-input">
+                            <button type="submit" class="add-to-cart-button">Aggiungi al carrello</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <% } %>
+            </c:forEach>
         </div>
     </div>
 
@@ -56,8 +55,11 @@
         <button id="pagina-successiva" onclick="cambiaPagina(1)">Successiva</button>
     </div>
 
-    <%@ include file="/WEB-INF/results/footer.jsp" %>
-    <script src="./script/paging.js"></script>
+</div>
+
+<%@ include file="/WEB-INF/results/footer.jsp" %>
+<script src="./script/paging.js"></script>
 </body>
 </html>
+
 
