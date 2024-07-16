@@ -13,13 +13,11 @@ import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
+import jakarta.servlet.http.*;
 import model.DAO.CategoriaDAO;
 import model.DAO.ProdottoDAO;
 import model.beans.Prodotto;
+import model.beans.Utente;
 
 @WebServlet("/add-product-servlet")
 @MultipartConfig
@@ -29,19 +27,33 @@ public class AddProductServlet extends HttpServlet {
     private static final long MAX_FILE_SIZE = 1024 * 1024 * 10; // 10 MB
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Utente utente = (Utente) session.getAttribute("utente");
+        if(utente == null || !utente.isAdminCheck()){
+            throw new MyServletException("Non puoi accedere a questa pagina");
+        }
+        //Controlli dei parametri lato server
         CategoriaDAO categoriaDAO = new CategoriaDAO();
         Prodotto nuovoProdotto = new Prodotto();
         try {
             String nome = request.getParameter("nome");
             String descrizione = request.getParameter("descrizione");
             int prezzo = Integer.parseInt(request.getParameter("prezzo"));
-            boolean inVetrina = request.getParameter("vetrina") != null; // checkbox
+            boolean inVetrina = request.getParameter("vetrina") != null; // Se il parametro è true inVetrina è true se vetrina è null inVetrina è false
             int sconto = Integer.parseInt(request.getParameter("sconto"));
             int quantita = Integer.parseInt(request.getParameter("quantita"));
             String nomeCategoria = request.getParameter("nomecategoria");
             if(categoriaDAO.doRetrieveByNomeCategoria(nomeCategoria)==null) {
-                throw new ServletException("Categoria non esistente");
+                throw new MyServletException("Categoria non esistente");
             }
+            if(nome==null|| descrizione==null || nomeCategoria==null ){
+                throw new MyServletException("Non sono accettati valori null");
+            }
+            if(sconto <= 0 || prezzo <= 0 || sconto>=99 || quantita <= 0){
+                throw new MyServletException("Valori inseriti non sono accettabili");
+            }
+
+
             nuovoProdotto.setVetrina(inVetrina);
             nuovoProdotto.setNomeCategoria(nomeCategoria);
             nuovoProdotto.setPrezzo(prezzo);
@@ -51,9 +63,7 @@ public class AddProductServlet extends HttpServlet {
             nuovoProdotto.setNome(nome);
         } catch (NumberFormatException e) {
             //nel caso ci sia un errore di formato nei dati inviati dal form
-            request.setAttribute("errorMessage", "Uno o più formati del form non sono corretti");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/general-error.jsp");
-            dispatcher.forward(request, response);
+            throw new MyServletException("Uno o più parametri nel form non validi");
         }
 
 

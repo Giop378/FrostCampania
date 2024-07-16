@@ -22,23 +22,48 @@ public class ConfirmOrderServlet extends HttpServlet {
         Utente utente = (Utente) session.getAttribute("utente");
         List<Carrello> carrello = (List<Carrello>) session.getAttribute("carrello");
 
-        if (utente == null || carrello == null || carrello.isEmpty()) {
-            response.sendRedirect("error-page.jsp"); // Reindirizza ad una pagina di errore se l'utente o il carrello non sono validi
-            return;
+        if ( utente == null || carrello == null || carrello.isEmpty() || utente.isAdminCheck() ) {
+            throw new MyServletException("Conferma ordine non possibile: non puoi accedere a questa pagina");
         }
 
-        // Recupera i dettagli dell'ordine dal form
-        String nome = request.getParameter("nome");
-        String cognome = request.getParameter("cognome");
-        String via = request.getParameter("via");
-        int numeroCivico = Integer.parseInt(request.getParameter("numerocivico"));
-        int cap = Integer.parseInt(request.getParameter("cap"));
-        String telefono = request.getParameter("telefono");
-        MetodoPagamentoDAO metodoPagamentoDAO = new MetodoPagamentoDAO();
-        MetodoPagamento metodoPagamento = metodoPagamentoDAO.doRetrieveByName(request.getParameter("metodoPagamento"));
-        MetodoSpedizioneDAO metodoSpedizioneDAO = new MetodoSpedizioneDAO();
-        MetodoSpedizione metodoSpedizione = metodoSpedizioneDAO.doRetrieveByName(request.getParameter("metodoSpedizione"));
-
+        // Recupera i dettagli dell'ordine dal form e controlla se sono corretti
+        String nome;
+        String cognome;
+        String via;
+        int numeroCivico;
+        int cap;
+        String telefono;
+        MetodoPagamento metodoPagamento;
+        MetodoSpedizione metodoSpedizione;
+        try {
+            nome = request.getParameter("nome");
+            cognome = request.getParameter("cognome");
+            via = request.getParameter("via");
+            String numeroCivicoStr = request.getParameter("numerocivico");
+            String capStr = request.getParameter("cap");
+            telefono = request.getParameter("telefono");
+            MetodoPagamentoDAO metodoPagamentoDAO = new MetodoPagamentoDAO();
+            metodoPagamento = metodoPagamentoDAO.doRetrieveByName(request.getParameter("metodoPagamento"));
+            MetodoSpedizioneDAO metodoSpedizioneDAO = new MetodoSpedizioneDAO();
+            metodoSpedizione = metodoSpedizioneDAO.doRetrieveByName(request.getParameter("metodoSpedizione"));
+            if (nome == null || cognome == null || via == null || telefono == null || metodoPagamento == null || metodoSpedizione == null) {
+                throw new MyServletException("Tutti i campi sono obbligatori");
+            }
+            //Controllo dei giusti formati
+            if (!nome.matches("[a-zA-Z ]+") || !cognome.matches("[a-zA-Z ]+")) {
+                throw new MyServletException("Nome o cognome non validi.");
+            }
+            if (!numeroCivicoStr.matches("[0-9]{1,4}") || !capStr.matches("[0-9]{5}")) {
+                throw new MyServletException("Numero civico o CAP non validi.");
+            }
+            numeroCivico=Integer.parseInt(numeroCivicoStr);
+            cap = Integer.parseInt(capStr);
+            if (telefono != null && !telefono.matches("[0-9]{9,15}")) {
+                throw new MyServletException("Numero di telefono non valido.");
+            }
+        } catch (NumberFormatException ex) {
+            throw new MyServletException("Parametri in input non validi");
+        }
         // Crea un oggetto Ordine
         Ordine ordine = new Ordine();
         ordine.setIdUtente(utente.getIdUtente());
@@ -58,7 +83,7 @@ public class ConfirmOrderServlet extends HttpServlet {
             Prodotto prodotto = prodottoDAO.doRetrieveById(idProdotto);
 
             // Controllo se c'è qualche prodotto da ordinare la cui quantità è maggiore di quella nel magazzino
-            if (itemCarrello.getQuantità() > prodotto.getQuantità()) {
+            if ( itemCarrello.getQuantità() > prodotto.getQuantità() ) {
                 throw new MyServletException("Prodotto non più disponibile nelle quantità inserite dall'utente");
             }
 

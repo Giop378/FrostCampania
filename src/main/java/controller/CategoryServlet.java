@@ -16,26 +16,22 @@ import java.util.List;
 
 @WebServlet(name = "CategoryServlet", value = "/categoria")
 public class CategoryServlet extends HttpServlet {
-    private Categoria findCategoriaByName(List<Categoria> categorie, String nomeCategoria) {
-        for (Categoria categoria : categorie) {
-            if (categoria.getNome().equalsIgnoreCase(nomeCategoria)) {
-                return categoria;
-            }
-        }
-        return null; // Se non trova la categoria, restituisce null
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nomeCategoria = request.getParameter("categoria");
+        //Controllo sul parametro
+        if(nomeCategoria==null || nomeCategoria.equals("")){
+            throw new MyServletException("Parametro categoria non valido");
+        }
+
         ProdottoDAO prodottoDAO = new ProdottoDAO();
         CategoriaDAO categoriaDAO = new CategoriaDAO();
-
         List<Prodotto> prodottiPerCategoria = prodottoDAO.doRetrieveByCategory(nomeCategoria);
         List<Categoria> categorie = categoriaDAO.doRetrieveAll();
 
         //cerca la categoria per nome
-        Categoria categoriaScelta = findCategoriaByName(categorie, nomeCategoria);
+        Categoria categoriaScelta = categoriaDAO.doRetrieveByNomeCategoria(nomeCategoria);
 
         if (categoriaScelta != null) {
 

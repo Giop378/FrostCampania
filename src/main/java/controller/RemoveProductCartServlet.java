@@ -26,7 +26,13 @@ public class RemoveProductCartServlet extends HttpServlet {
         List<Carrello> carrelloSession = (List<Carrello>) session.getAttribute("carrello");
 
         if (carrelloSession != null) {
-            int idProdotto = Integer.parseInt(request.getParameter("idProdotto"));
+            int idProdotto;
+            try {
+                idProdotto= Integer.parseInt(request.getParameter("idProdotto"));
+            }catch(NumberFormatException ex){
+                throw new MyServletException("Errore in idProdotto: non è un numero!!");
+            }
+
             for (int i = 0; i < carrelloSession.size(); i++) {
                 if (carrelloSession.get(i).getIdProdotto() == idProdotto) {
                     carrelloSession.remove(i);

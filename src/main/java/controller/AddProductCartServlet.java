@@ -29,12 +29,46 @@ public class AddProductCartServlet extends HttpServlet {
         }
 
         ProdottoDAO prodottoDAO = new ProdottoDAO();
-        // Si prende l'id passato dal client e si recupera tramite DAO il relativo prodotto
-        Prodotto p = prodottoDAO.doRetrieveById(Integer.parseInt(request.getParameter("idProdotto")));
+
+        //Controlli lato server il parametro idProdotto
+        int idProdotto = 0;
+        String idProdottoParam = request.getParameter("idProdotto");
+
+        if (idProdottoParam == null || idProdottoParam.trim().isEmpty()) {
+            throw new MyServletException("Il parametro idProdotto non può essere vuoto");
+        }
+
+        try {
+            idProdotto = Integer.parseInt(idProdottoParam);
+            if (idProdotto <= 0) {
+                throw new MyServletException("Id prodotto non valido: deve essere un numero intero positivo");
+            }
+        } catch (NumberFormatException e) {
+            throw new MyServletException("Id prodotto non valido: deve essere un numero intero");
+        }
+
+
+        Prodotto p = prodottoDAO.doRetrieveById(idProdotto);
         if(p==null){
             throw new MyServletException("Il prodotto non esiste");
         }
-        int quantità = Integer.parseInt(request.getParameter("quantità"));
+
+        //Controllo lato server parametro quantità
+        int quantità;
+        String quantitàParam = request.getParameter("quantità");
+        if (quantitàParam == null || quantitàParam.trim().isEmpty()) {
+            throw new MyServletException("Inserire la quantità è obbligatorio");
+        }
+
+        try {
+            quantità= Integer.parseInt(quantitàParam);
+            if (quantità<= 0) {
+                throw new MyServletException("La quantità deve essere un numero intero positivo");
+            }
+        } catch (NumberFormatException e) {
+            throw new MyServletException("Quantità non valida: deve essere un numero intero");
+        }
+
         Carrello carrello = new Carrello();
         if (session.getAttribute("utente") == null) {
             carrello.setIdUtente(null);
@@ -50,6 +84,7 @@ public class AddProductCartServlet extends HttpServlet {
         carrello.setImmagineProdotto(p.getImmagine());
         carrello.setNomeProdotto(p.getNome());
         carrello.setIdProdotto(p.getIdProdotto());
+
         //Prima di inserire la quantità controllo che effettivamente ci sono in magazzino abbastanza prodotti
         if(quantità > p.getQuantità()){
             throw new MyServletException("Quantità selezionata del prodotto non presente in magazzino");

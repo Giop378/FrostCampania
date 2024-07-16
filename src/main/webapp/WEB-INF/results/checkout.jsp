@@ -60,7 +60,7 @@
 
         <div class="total">
             <% int prezzoTotale = (int) request.getAttribute("prezzoTotale"); %>
-            Prezzo Totale: €<%= String.format("%.2f", (double) prezzoTotale / 100).replace('.', ',') %>
+            Prezzo Totale(Spedizione esclusa): €<%= String.format("%.2f", (double) prezzoTotale / 100).replace('.', ',') %>
         </div>
 
         <button type="submit">ConfermaOrdine</button>

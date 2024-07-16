@@ -59,7 +59,7 @@
                 <label for="datadinascita">Data di Nascita</label>
                 <input type="date" id="datadinascita" name="datadinascita" required>
             </div>
-            <button type="submit" class="login-button">Register</button>
+            <button type="submit" class="login-button">Registrati</button>
             <p id="error-message" class="error-message"></p>
         </form>
     </div>

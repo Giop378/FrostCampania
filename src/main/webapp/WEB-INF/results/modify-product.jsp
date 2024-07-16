@@ -41,16 +41,16 @@
   <input type="text" id="descrizione" name="descrizione" required><br>
 
   <label for="prezzo">Prezzo(in centesimi):</label>
-  <input type="number" id="prezzo" name="prezzo" required><br>
+  <input type="number" id="prezzo" name="prezzo" min="0" step="1" required><br>
 
   <label for="vetrina">In Vetrina:</label>
   <input type="checkbox" id="vetrina" name="vetrina" value="true"><br>
 
   <label for="sconto">Sconto(percentuale intera):</label>
-  <input type="number" id="sconto" name="sconto" value="0"><br>
+  <input type="number" id="sconto" name="sconto" value="0" min="0" step="1" required><br>
 
   <label for="quantita">Quantità:</label>
-  <input type="number" id="quantita" name="quantita" required  min="1" step="1"><br>
+  <input type="number" id="quantita" name="quantita" required  min="0" step="1" ><br>
 
   <label for="categoria">Categoria:</label>
   <select id="categoria" name="nomecategoria" required>

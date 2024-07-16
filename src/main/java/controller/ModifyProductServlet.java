@@ -43,8 +43,15 @@ public class ModifyProductServlet extends HttpServlet {
             int sconto = Integer.parseInt(request.getParameter("sconto"));
             int quantita = Integer.parseInt(request.getParameter("quantita"));
             String nomeCategoria = request.getParameter("nomecategoria");
+            //controlli delle stringe lato server
             if(categoriaDAO.doRetrieveByNomeCategoria(nomeCategoria)==null){
                 throw new ServletException("Categoria non esistente");
+            }
+            if(nome==null|| descrizione==null || nomeCategoria==null ){
+                throw new MyServletException("Non sono accettati valori null");
+            }
+            if(sconto <= 0 || prezzo <= 0 || sconto>=99 || quantita <= 0){
+                throw new MyServletException("Valori inseriti non sono accettabili");
             }
             prodottoModificato.setIdProdotto(idProdotto);
             prodottoModificato.setNomeCategoria(nomeCategoria);
@@ -57,7 +64,7 @@ public class ModifyProductServlet extends HttpServlet {
             prodottoModificato.setVetrina(inVetrina);
             prodottoDAO.doUpdate(prodottoModificato);
         } catch (NumberFormatException e) {
-            throw new MyServletException(e.getMessage());
+            throw new MyServletException("Uno o più parametri errati nel form");
         }
         String successMessage = "Prodotto modificato con successo";
         request.setAttribute("successMessage", successMessage);

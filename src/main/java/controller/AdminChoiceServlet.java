@@ -19,17 +19,20 @@ import java.util.List;
 public class AdminChoiceServlet extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String choice = request.getParameter("choice");
+        if(choice==null){
+            throw new MyServletException("Errore nella richiesta");
+        }
         if("addproduct".equals(choice)){
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/add-product.jsp");
             dispatcher.forward(request, response);
-        }
-        if("modifyproduct".equals(choice)){
+        }else if("modifyproduct".equals(choice)){
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/modify-product.jsp");
             dispatcher.forward(request, response);
-        }
-        if("deleteproduct".equals(choice)){
+        }else if("deleteproduct".equals(choice)){
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/delete-product.jsp");
             dispatcher.forward(request, response);
+        }else{
+           throw new MyServletException("Errore nella richiesta");
         }
     }
 

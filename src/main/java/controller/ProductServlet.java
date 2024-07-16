@@ -20,8 +20,13 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        int  idProdotto = Integer.parseInt(request.getParameter("id"));
+        int idProdotto;
+        try {
+            idProdotto = Integer.parseInt(request.getParameter("id"));
+        }catch(NumberFormatException ex){
+            throw new MyServletException("L'id è un numero intero!!");
+        }
+        idProdotto = Integer.parseInt(request.getParameter("id"));
         ProdottoDAO prodottoDAO = new ProdottoDAO();
 
         Prodotto prodotto = prodottoDAO.doRetrieveById(idProdotto);

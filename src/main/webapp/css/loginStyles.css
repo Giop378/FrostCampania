@@ -18,7 +18,8 @@ body {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 100%;
+    max-width: 400px;
     text-align: center;
 }
 
@@ -34,7 +35,7 @@ body {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 550px;
+    max-width: 400px;
     max-height: 540px; /* Impostiamo un'altezza massima */
     text-align: center;
 }

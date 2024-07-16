@@ -24,11 +24,10 @@ public class UserServlet extends HttpServlet {
             if("register".equals(action)){
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/register.jsp");
                 requestDispatcher.forward(request, response);
+            }else {
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/login.jsp");
+                requestDispatcher.forward(request, response);
             }
-
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/login.jsp");
-            requestDispatcher.forward(request, response);
-
 
         }else if (utente.isAdminCheck()){//caso in cui l'utente è già loggato ed è un admin
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/admin.jsp");

@@ -39,8 +39,21 @@ public class LoginServlet extends HttpServlet {
             String cognome = request.getParameter("cognome");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            LocalDate dataDiNascita = LocalDate.parse(request.getParameter("datadinascita"));
+            LocalDate dataDiNascita;
+            try {
+                dataDiNascita = LocalDate.parse(request.getParameter("datadinascita"));
+            }catch (Exception ex){
+                throw new MyServletException("Data di nascita non valida");
+            }
             Boolean admin = false;
+
+            //controllo i dati in input
+            if (nome == null || !nome.matches("[a-zA-Z ]+")||
+                    cognome == null || !cognome.matches("[a-zA-Z ]+")||
+                    email == null || !email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")||
+                    password == null || password.length() < 8 ) {
+                throw new MyServletException("Dati in input non validi");
+            }
 
             Utente utente = new Utente();
             utente.setNome(nome);
@@ -60,15 +73,16 @@ public class LoginServlet extends HttpServlet {
 
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/profile.jsp");
             requestDispatcher.forward(request, response);
-        } else if ( "login".equals(action) && utenteSession == null) {
+        } else if ( "login".equals(action) && utenteSession == null) {//Caso in cui l'utente fa il login ma non ha già fatto l'accesso
             String email = request.getParameter("email");
             String password = request.getParameter("password");
+            if(email == null || password ==null){
+                throw new MyServletException("Parametri in input non validi");
+            }
             UtenteDAO utenteDAO = new UtenteDAO();
             Utente utente = utenteDAO.doRetrieveByEmailPassword(email, password);
             request.getSession().setAttribute("utente", utente);
             if ( utente == null ) {//nel caso provo a fare login ma l'utente non esiste lo si rimanda alla pagina di login
-                //String errorMessage = "Utente non esistente";
-                //request.setAttribute("errorMessage", errorMessage);
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/login.jsp");
                 requestDispatcher.forward(request, response);
             } else if ( utente.isAdminCheck() ) {//se l'utente esiste nel database ed è admin deve andare alla pagina admin
@@ -92,8 +106,7 @@ public class LoginServlet extends HttpServlet {
                 requestDispatcher.forward(request, response);
             }
         } else {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/general-error.jsp");
-            requestDispatcher.forward(request, response);
+            throw new MyServletException("Azione non valida");
         }
 
     }
