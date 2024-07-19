@@ -10,9 +10,9 @@ body {
 
 .logo-img {
     padding: 20px;
-    text-decoration: none; /* Rimuove il sottolineato */
+    text-decoration: none;
     transition: filter 0.3s ease; /* Aggiungi una transizione per un cambiamento di filtro fluido */
-    width: 100px; /* Imposta una dimensione appropriata per le icone */
+    width: 100px;
     height: 100px;
 }
 
@@ -47,12 +47,12 @@ h1 {
 
 
 .button-container button {
-    padding: 20px 30px; /* Aumentata l'altezza dei pulsanti */
+    padding: 20px 30px;
     font-size: 18px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 300px; /* Larghezza fissa per i pulsanti */
+    width: 300px;
 }
 
 .button-container button:nth-child(1) {

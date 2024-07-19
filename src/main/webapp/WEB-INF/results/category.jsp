@@ -27,7 +27,7 @@
     <div class="featured-products">
         <h2>PRODOTTI</h2>
         <div class="product-list" id="lista-prodotti">
-            <c:forEach var="prodotto" items="${requestScope.prodottiPerCategoria}">
+            <c:forEach var="prodotto" items="${prodottiPerCategoria}">
                 <div class="product">
                     <a href="prodotto?id=${prodotto.idProdotto}">
                         <img src="${prodotto.immagine}" alt="${prodotto.nome}" class="product-img">

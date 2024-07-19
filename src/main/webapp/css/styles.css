@@ -11,25 +11,25 @@ body {
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);/* Aggiunge un'ombra leggermente sfocata e trasparente sotto l'elemento */
 }
 
 .product-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+    display: flex;/* Imposta il contenitore come un flex container */
+    flex-wrap: wrap; /* Permette agli elementi flessibili di andare a capo su più righe */
+    gap: 20px;/* Imposta uno spazio di 20px tra gli elementi flessibili */
+    justify-content: center;/* Centra gli elementi flessibili orizzontalmente all'interno del contenitore */
 }
 
 .product {
-    flex: 1 1 calc(25% - 40px);
+    flex: 1 1 calc(25% - 40px);/* L'elemento può crescere e restringersi in proporzione agli altri elementi, con una base del 25% della larghezza del contenitore meno 40px */
     border: 1px solid #ddd;
     padding: 10px;
     text-align: center;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease;/* La transizione della proprietà box-shadow dura 0.3 secondi e utilizza la funzione di temporizzazione ease */
 }
 
 h2 {
@@ -48,7 +48,7 @@ h2 {
     width: 100%;
     height: auto;
     max-height: 250px; /* Altezza massima desiderata */
-    object-fit: cover;
+    object-fit: cover;/* Adatta l'immagine per coprire l'intero contenitore mantenendo le proporzioni e ritagliando se necessario */
     border-bottom: 1px solid #ddd;
     margin-bottom: 10px;
 }
@@ -66,7 +66,7 @@ h2 {
     background-color: #019FDC;
     border: none;
     color: #fff;
-    cursor: pointer;
+    cursor: pointer;/* Cambia il cursore del mouse in una mano puntata quando passa sopra l'elemento */
     transition: background-color 0.3s ease;
 }
 
@@ -90,7 +90,7 @@ h2 {
 .pagination {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; /* Centra verticalmente gli elementi all'interno del contenitore flessibile */
     margin-top: 20px;
 }
 
@@ -111,7 +111,7 @@ h2 {
 
 .pagination button:disabled {
     background-color: #ccc;
-    cursor: not-allowed;
+    cursor: not-allowed;/* Cambia il cursore del mouse in una mano puntata quando passa sopra l'elemento con una x di azione non permessa  */
 }
 
 #page-info {
@@ -145,7 +145,7 @@ h2 {
 
 @media (max-width: 576px) {
     .product-list {
-        flex-direction: column;
+        flex-direction: column;/* Impila gli elementi flessibili verticalmente */
         align-items: center;
     }
 

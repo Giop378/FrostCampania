@@ -79,8 +79,8 @@ select {
     background-color: #fff;
     color: #555;
     appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    -webkit-appearance: none;/* Rimuove lo stile predefinito del browser */
+    -moz-appearance: none;/* Rimuove lo stile predefinito del browser(FireFox) */
 }
 
 select:focus {

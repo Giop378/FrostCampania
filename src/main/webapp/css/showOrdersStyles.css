@@ -19,7 +19,7 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     max-width: 100%;
     width: 90%;
-    flex-grow: 1;
+    flex-grow: 1;/* L'elemento può crescere per occupare lo spazio disponibile */
 }
 
 h1, h2 {
@@ -28,7 +28,7 @@ h1, h2 {
 
 table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: collapse;/* Unisce i bordi delle celle della tabella */
     margin-top: 20px;
 }
 

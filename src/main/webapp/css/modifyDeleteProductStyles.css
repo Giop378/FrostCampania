@@ -20,13 +20,13 @@ body {
 .logo-img {
     padding: 20px;
     text-decoration: none;
-    transition: filter 0.3s ease;
+    transition: filter 0.3s ease;/* Transizione per la proprietà 'filter' con durata di 0.3s e funzione di temporizzazione 'ease' */
     width: 100px;
     height: 100px;
 }
 
 .logo-img:hover {
-    filter: invert(100%);
+    filter: invert(100%);/* Inverte completamente i colori */
 }
 
 .spacer {
@@ -57,7 +57,7 @@ body {
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    z-index: 1000;
+    z-index: 1000;/* Z-index alto per far risaltare l'elemento */
 }
 
 .result-item {
@@ -160,8 +160,8 @@ select {
     background-color: #fff;
     color: #555;
     appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    -webkit-appearance: none;/* Rimuove lo stile predefinito del browser */
+    -moz-appearance: none;/* Rimuove lo stile predefinito del browser(FireFox) */
 }
 
 select:focus {

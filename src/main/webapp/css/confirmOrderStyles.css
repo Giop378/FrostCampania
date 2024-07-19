@@ -57,7 +57,7 @@ th {
     table {
         display: block;
         overflow-x: auto;
-        white-space: nowrap;
+        white-space: nowrap;/* Il testo non andrà a capo */
     }
 
     th, td {

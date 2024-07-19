@@ -129,7 +129,7 @@
     }
 
     .logo {
-        order: 1;
+        order: 1;/*ordine di visualizzazione in un layout Flexbox*/
     }
 
     .search-container {
