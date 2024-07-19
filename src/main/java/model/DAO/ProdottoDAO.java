@@ -130,7 +130,7 @@ public class ProdottoDAO {
         }
     }
     //Salva un prodotto nel database
-    public void doSave(Prodotto prodotto){
+    public synchronized void doSave(Prodotto prodotto){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("INSERT INTO prodotto (nome, prezzo, descrizione, immagine, vetrina, sconto, quantità, nomecategoria) VALUES(?,?,?,?,?,?,?,?)");
             ps.setString(1, prodotto.getNome());
@@ -151,7 +151,7 @@ public class ProdottoDAO {
         }
     }
     //Aggiorna un prodotto nel database
-    public void doUpdate(Prodotto prodotto){
+    public synchronized void doUpdate(Prodotto prodotto){
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("UPDATE Prodotto SET nome=?, prezzo=?, descrizione=?, immagine=?, vetrina=?, sconto=?, quantità=?, nomecategoria=? WHERE IdProdotto=?");
             ps.setString(1, prodotto.getNome());
@@ -198,7 +198,7 @@ public class ProdottoDAO {
         }
     }
     // Elimina un prodotto dal database dato l'id del prodotto
-    public void doDelete(int idProdotto) {
+    public synchronized void doDelete(int idProdotto) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("DELETE FROM prodotto WHERE idProdotto = ?");
             ps.setInt(1, idProdotto);

@@ -120,19 +120,19 @@ h2 {
 }
 
 /* Responsive CSS */
-@media (max-width: 1200px) {
+@media screen and (max-width: 1200px) {
     .product {
         flex: 1 1 calc(33.333% - 40px);
     }
 }
 
-@media (max-width: 992px) {
+@media screen and  (max-width: 992px) {
     .product {
         flex: 1 1 calc(50% - 40px);
     }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .product {
         flex: 1 1 100%;
     }
@@ -143,7 +143,7 @@ h2 {
     }
 }
 
-@media (max-width: 576px) {
+@media screen and (max-width: 576px) {
     .product-list {
         flex-direction: column;/* Impila gli elementi flessibili verticalmente */
         align-items: center;

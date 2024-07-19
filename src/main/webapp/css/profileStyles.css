@@ -64,8 +64,13 @@ body {
 .profile-button:active {
     transform: translateY(0);
 }
+@media screen and (max-width: 800px){
+    .profile-container {
+        height: 55vh;
+    }
+}
 
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
     .profile-container {
         padding: 20px;
     }
@@ -79,4 +84,11 @@ body {
         width: 100%;
         text-align: center;
     }
+}
+
+@media screen and (min-height:1000px)  and (max-width: 1000px) {
+    .profile-container{
+        min-height: 65vh;
+    }
+
 }

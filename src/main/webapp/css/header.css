@@ -35,6 +35,11 @@
     border-radius: 5px;
 }
 
+.search-container:focus,
+.search-bar:focus{
+    filter: invert(20%);
+}
+
 .icon-container {
     display: flex;
     align-items: center;
@@ -121,7 +126,7 @@
     text-decoration: none; /* Rimuove la sottolineatura dai paragrafi */
 }
 
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
     .header {
         flex-direction: row;
         justify-content: space-between;

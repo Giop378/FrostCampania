@@ -47,7 +47,7 @@ public class UtenteDAO {
         return utente;
     }
 
-    public int doSave(Utente utente) {
+    public synchronized int doSave(Utente utente) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
                     "INSERT INTO utente (nome, cognome, email, passwordhash, datadinascita, adminCheck) VALUES(?,?,?,?,?,?)",

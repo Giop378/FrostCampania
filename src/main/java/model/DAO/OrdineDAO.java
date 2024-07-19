@@ -125,7 +125,7 @@ public class OrdineDAO {
     }
 
     // Salva un nuovo ordine nel database e restituisce l'ID generato
-    public int doSave(Ordine ordine) {
+    public synchronized int doSave(Ordine ordine) {
         try (Connection con = ConPool.getConnection()) {
             String sql = "INSERT INTO ordine (prezzo, IdUtente, cap, numerocivico, nome, cognome, via, telefono, nomemetodopagamento, nomemetodospedizione) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

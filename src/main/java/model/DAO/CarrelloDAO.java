@@ -32,7 +32,7 @@ public class CarrelloDAO {
         return carrelli;
     }
     //salva gli elementi del carrello nel database
-    public void doSave(List<Carrello> carrelli) {
+    public synchronized void doSave(List<Carrello> carrelli) {
         if(carrelli == null || carrelli.isEmpty()){
             return;
         }
@@ -56,7 +56,7 @@ public class CarrelloDAO {
         }
     }
     //cancella i prodotti nel carrello di un utente
-    public void doDelete(int idUtente) {
+    public synchronized void doDelete(int idUtente) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
                     "DELETE FROM carrello WHERE IdUtente = ?"

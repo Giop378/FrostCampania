@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 var img = document.createElement('img');
                 img.src = prodotto.immagine;
+                img.alt = prodotto.nome;
                 resultItem.appendChild(img);
 
                 var productInfo = document.createElement('div');

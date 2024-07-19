@@ -34,6 +34,8 @@ public class LoginServlet extends HttpServlet {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/profile.jsp");
                 requestDispatcher.forward(request, response);
             }
+
+
         } else if ( "register".equals(action) && utenteSession == null ) {//in questo caso si tratta di una registrazione(non ci si può registrare come admin per motivi di sicurezza deve essere fatta la modifica nel database)
             String nome = request.getParameter("nome");
             String cognome = request.getParameter("cognome");
@@ -66,28 +68,44 @@ public class LoginServlet extends HttpServlet {
             UtenteDAO utenteDAO = new UtenteDAO();
             int idUtente = utenteDAO.doSave(utente);
 
-            //Cambio l'id dei prodotti del carrello che sono ancora null e li imposto con il nuovo id utente
+            //Setto l'id dell'utente per salvarlo nella sessione
             utente.setIdUtente(idUtente);
 
             request.getSession().setAttribute("utente", utente);
 
+            //Imposto l'id di tutti gli utenti nel carrello
+            List<Carrello> carrelloSession = (List<Carrello>) request.getSession().getAttribute("carrello");
+            if(carrelloSession == null){
+                carrelloSession = new ArrayList<Carrello>();
+            }
+            for(Carrello carrello : carrelloSession){
+                carrello.setIdUtente(utente.getIdUtente());
+            }
+            request.getSession().setAttribute("carrello", carrelloSession);
+
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/profile.jsp");
             requestDispatcher.forward(request, response);
-        } else if ( "login".equals(action) && utenteSession == null) {//Caso in cui l'utente fa il login ma non ha già fatto l'accesso
+
+
+        } else if ( "login".equals(action) && utenteSession == null) {//Caso in cui l'utente fa il login e non ha già fatto l'accesso
             String email = request.getParameter("email");
             String password = request.getParameter("password");
+
             if(email == null || password ==null){
                 throw new MyServletException("Parametri in input non validi");
             }
             UtenteDAO utenteDAO = new UtenteDAO();
             Utente utente = utenteDAO.doRetrieveByEmailPassword(email, password);
             request.getSession().setAttribute("utente", utente);
-            if ( utente == null ) {//nel caso provo a fare login ma l'utente non esiste lo si rimanda alla pagina di login
+
+            if ( utente == null ) {//nel caso provo a fare login ma l'utente non esiste lo si rimanda alla pagina di login perchè l'utente non esiste
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/login.jsp");
                 requestDispatcher.forward(request, response);
+
             } else if ( utente.isAdminCheck() ) {//se l'utente esiste nel database ed è admin deve andare alla pagina admin
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/results/admin.jsp");
                 requestDispatcher.forward(request, response);
+
             } else{//se l'utente esiste e non è admin deve andare alla pagina profilo utente
                 //questa parte si occupa di prendere i prodotti del carrello da DB e unirli con quelli in sessione
                 List<Carrello> carrelloSession = (List<Carrello>) request.getSession().getAttribute("carrello");

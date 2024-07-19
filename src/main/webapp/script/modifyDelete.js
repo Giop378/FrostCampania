@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 link.classList.add('product-link');
 
                 var img = document.createElement('img');
+                img.alt = prodotto.nome;
                 img.src = prodotto.immagine;
                 resultItem.appendChild(img);
 

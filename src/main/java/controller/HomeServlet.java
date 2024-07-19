@@ -18,7 +18,7 @@ public class HomeServlet extends HttpServlet {
         ProdottoDAO prodottoDAO = new ProdottoDAO();
         List<Prodotto> prodottiVetrina = prodottoDAO.doRetrieveVetrina();
         request.setAttribute("prodottiVetrina", prodottiVetrina);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/home.jsp");
         dispatcher.forward(request, response);
     }
 

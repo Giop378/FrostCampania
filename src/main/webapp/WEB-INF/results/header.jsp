@@ -21,8 +21,8 @@
     <img src="./images/logo.png" alt="FrostCampania Logo" class="logo-img">
   </a>
   <div class="search-container">
-    <input type="text" placeholder="Cerca i nostri prodotti..." class="search-bar" aria-label="Search">
-    <div class="search-results"></div>
+    <input type="text" placeholder="Cerca i nostri prodotti..." class="search-bar" aria-label="Cerca" aria-labelledby="results">
+    <div class="search-results" id="results"></div>
   </div>
 
   <div class="icon-container">

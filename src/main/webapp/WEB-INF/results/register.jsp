@@ -49,11 +49,11 @@
             </div>
             <div class="input-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required maxlength="8">
+                <input type="password" id="password" name="password" required minlength="8">
             </div>
             <div class="input-group">
                 <label for="confirm-password">Conferma Password</label>
-                <input type="password" id="confirm-password" name="confirm-password" required maxlength="8">
+                <input type="password" id="confirm-password" name="confirm-password" required minlength="8">
             </div>
             <div class="input-group">
                 <label for="datadinascita">Data di Nascita</label>

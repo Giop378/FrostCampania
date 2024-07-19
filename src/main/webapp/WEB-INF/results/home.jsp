@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-<%@ include file="./WEB-INF/results/header.jsp" %>
+<%@ include file="header.jsp" %>
 
 <div class="main">
     <div class="intro">
@@ -34,8 +34,8 @@
                     <div class="add-to-cart">
                         <form action="add-product-cart" method="post">
                             <input type="hidden" name="idProdotto" value="${prodotto.idProdotto}">
-                            <input type="number" name="quantità" value="1" min="1" step="1" class="quantity-input">
-                            <button type="submit" class="add-to-cart-button">Aggiungi al carrello</button>
+                            <input type="number" name="quantità" value="1" min="1" step="1" class="quantity-input" aria-labelledby="aggiungi-carrello">
+                            <button id="aggiungi-carrello" type="submit" class="add-to-cart-button">Aggiungi al carrello</button>
                         </form>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
         </div>
     </div>
 </div>
-<%@ include file="./WEB-INF/results/footer.jsp" %>
+<%@ include file="footer.jsp" %>
 </body>
 </html>
 

@@ -86,7 +86,7 @@ body {
 }
 
 /* Responsive CSS */
-@media (max-width: 1024px) {
+@media screen and (max-width: 480px) {
     .login-container {
     }
 

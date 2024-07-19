@@ -23,12 +23,12 @@
             <div class="product-image">
                 <img src="<%= prodottoCarrello.getImmagineProdotto() %>" alt="<%= prodottoCarrello.getNomeProdotto() %>" class="product-img">
             </div>
-            <div class="product-details">
-                <div><%= prodottoCarrello.getNomeProdotto() %></div>
+            <div class="product-details" id="">
+                <div id="product-name"><%= prodottoCarrello.getNomeProdotto() %></div>
             </div>
             <div class="product-action">
                 <div class="product-quantity">
-                    Quantità: <input type="number" id="<%= prodottoCarrello.getIdProdotto() %>" name="quantita" value="<%= prodottoCarrello.getQuantità() %>" min="1" step="1" onchange="updateQuantita(<%= prodottoCarrello.getIdProdotto() %>)">
+                    Quantità: <input type="number" id="<%= prodottoCarrello.getIdProdotto() %>" name="quantita" value="<%= prodottoCarrello.getQuantità() %>" min="1" step="1" onchange="updateQuantita(<%= prodottoCarrello.getIdProdotto() %>)" aria-labelledby="product-name">
 
                     <form action="remove-product-cart" method="post">
                         <input type="hidden" name="idProdotto" value="<%= prodottoCarrello.getIdProdotto() %>">
@@ -36,7 +36,7 @@
                     </form>
                 </div>
                 <div class="product-price">
-                    Prezzo: €<%= String.format("%.2f", prodottoCarrello.getPrezzoProdotto() / 100.0).replace('.', ',') %>
+                    Prezzo(Singola unità): €<%= String.format("%.2f", prodottoCarrello.getPrezzoProdotto() / 100.0).replace('.', ',') %>
                 </div>
             </div>
         </div>

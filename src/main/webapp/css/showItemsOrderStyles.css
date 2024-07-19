@@ -23,3 +23,10 @@ body{
 .item-details h2 {
     margin-top: 0;
 }
+
+@media screen and (min-height:1000px) and (max-width: 1000px)  {
+    .content-wrapper{
+        min-height: 75vh;
+    }
+
+}

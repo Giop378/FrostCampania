@@ -1,27 +1,22 @@
 function updateQuantita(idProdotto) {
     var nuovaQuantita = document.getElementById(idProdotto).value;
 
-    // Costruisci l'oggetto dati da inviare come JSON
-    var requestData = {
-        idProdotto: idProdotto,
-        quantita: nuovaQuantita
-    };
-
-    fetch('update-cart-quantity', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestData) // Converte l'oggetto in JSON
-    })
+    fetch("update-cart-quantity?idProdotto=" + encodeURIComponent(idProdotto) + "&nuovaQuantita=" + encodeURIComponent(nuovaQuantita))
         .then(response => {
             if (!response.ok) {
-                throw new MyServletException('Errore durante l\'aggiornamento della quantità');
+                return response.json().then(error => {
+                    throw new Error(error.message);
+                });
             }
-
+            // Restituisci il JSON della risposta se la richiesta ha successo
+            return response.json();
+        })
+        .then(data => {
+            // Aggiorna la quantità nell'HTML
+            document.getElementById(idProdotto).value = data.nuovaQuantita;
         })
         .catch(error => {
-            alert("Errore");
-
+            // Mostra un messaggio di errore all'utente
+            alert("Errore: " + error.message);
         });
 }

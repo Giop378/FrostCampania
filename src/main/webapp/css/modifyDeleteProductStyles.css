@@ -47,6 +47,12 @@ body {
     border-radius: 5px;
 }
 
+.search-container:focus,
+.search-bar:focus{
+    filter: invert(20%);
+}
+
+
 /* Stili per i risultati della ricerca */
 .search-results {
     position: absolute;

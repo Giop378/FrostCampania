@@ -14,7 +14,7 @@ public class ItemOrdineDAO {
 
 
     // Salva un nuovo item ordine nel database
-    public void doSave(ItemOrdine itemOrdine) {
+    public synchronized void doSave(ItemOrdine itemOrdine) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
                     "INSERT INTO itemordine (nome, immagine, prezzo, quantità, sconto, IdProdotto, IdOrdine) " +

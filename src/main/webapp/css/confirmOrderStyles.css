@@ -3,6 +3,7 @@ body {
     font-family: 'Georgia', serif;
     background-color: #fff;
     color: #333;
+    min-height: 100vh;
 }
 
 .container {
@@ -53,7 +54,7 @@ th {
 }
 
 /* Responsive CSS */
-@media (max-width: 1024px) {
+@media screen and (max-width: 1024px) {
     table {
         display: block;
         overflow-x: auto;
@@ -73,6 +74,9 @@ th {
     }
 
     td {
-        border: 1px solid #ddd;
+        border: 3px solid #ddd;
     }
+
 }
+
+
